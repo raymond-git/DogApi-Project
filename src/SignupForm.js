@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 
 function SignupForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const[dogBreeds, setDogBreeds] = useState([]);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -12,7 +13,6 @@ function SignupForm() {
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
-
 
   //Make a post request to the server frontend.js
   async function handleSubmit(event) {
@@ -37,6 +37,20 @@ function SignupForm() {
       });
     }
 
+  useEffect(() => {
+     async function FetchDogData() {
+       const dogBreed = await fetch("https://dog.ceo/api/breeds/list/all");
+       const data = await dogBreed.json();
+       
+       //Get all of the object for the dogs
+       const dogNames = Object.keys(data.message);
+       setDogBreeds(dogNames);
+      }
+
+     FetchDogData();
+
+    }, []);
+
   return (
     <form onSubmit={handleSubmit}>
       <label>
@@ -50,6 +64,8 @@ function SignupForm() {
       </label>
       <br />
       <input type="submit" value="Submit"></input>
+
+      <select id="dropdownmenu">{dogBreeds.map((breed) => (<option key={breed.id} value={breed}>{breed}</option>))}</select>
     </form>
   );
 }
