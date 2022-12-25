@@ -1,6 +1,8 @@
 import './App.css';
 import './index.css';
-import SignupForm from './SignupForm'
+import LoginForm from './LoginForm';
+import DogBreed from './DogBreed';
+import SignupForm from './SignupForm.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
@@ -10,7 +12,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route exact path="/login" element={<SignupForm/>} />
+          <Route exact path="/login" element={<LoginForm/>} />
+          <Route exact path="/signup" element={<SignupForm/>} />
+          <Route exact path="/dogbreed" element={<DogBreed/>} />
         </Routes>
       </BrowserRouter>
     </div>
