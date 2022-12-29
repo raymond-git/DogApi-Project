@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { MDBContainer, MDBRow, MDBCol, MDBInput } from 'mdb-react-ui-kit';
-import { Form } from 'react-bootstrap'
+import React, { useState } from "react";
+import { MDBContainer, MDBRow, MDBCol, MDBInput } from "mdb-react-ui-kit";
+import { Form } from "react-bootstrap";
 
 function SignupForm() {
   const [email, setEmail] = useState("");
@@ -14,7 +14,6 @@ function SignupForm() {
     setPassword(event.target.value);
   };
 
- 
   // Make a post request to the server frontend.js
   async function handleSubmit(event) {
     event.preventDefault();
@@ -69,7 +68,7 @@ function SignupForm() {
                   onChange={handlePasswordChange}
                 />
 
-                <div className="text-center pt-1 mb-5 pb-1">
+                <div className="text-center pt-1 pb-1">
                   <button className="mb-4 w-100 gradient-custom-2 length">
                     Sign Up
                   </button>
@@ -84,18 +83,7 @@ function SignupForm() {
 
           <MDBCol col="6" className="mb-5">
             <div className="d-flex flex-column justify-content-center gradient-custom-2 mb-4">
-            <img id="dogHome" src="/dogHome.png" alt="dogimage"/>
-              {/* <div className="text-white px-3 py-4 p-md-5 mx-md-4">
-              
-                <h4 className="mb-4">Find the type of dogs you want to see</h4>
-                <p className="small mb-0" >
-                  Browsing through dogs on a website can be a fun and rewarding
-                  experience. There are a wide variety of dogs available to
-                  view, ranging from small toy breeds to large working breeds.
-                  You can browse through different breeds to find the one that
-                  best fits your lifestyle and personality.
-                </p>
-              </div> */}
+              <img id="dogHome" src="/dogHome.png" alt="dogimage" />
             </div>
           </MDBCol>
         </MDBRow>
