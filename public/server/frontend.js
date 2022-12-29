@@ -29,7 +29,7 @@ mongoose.connect("mongodb://localhost:27017").then(() => {
 
 
 // Check to see if connected to MongoDB database
-const url = "mongodb://localhost:27017";
+const url = "mongodb://127.0.0.1:27017";
 const client = new MongoClient(url);
 client
   .connect()
@@ -54,8 +54,8 @@ client
       } else {
         res.send("You have successfully registered your account");
       }
-    });
-  });
+    })
+  })
 
 
 // Server sends user form request to the client
@@ -64,25 +64,30 @@ app.post("/login", async (req, res) => {
   const dbName = "test";
   const db = client.db(dbName);
   const collection = db.collection("signups");
-  collection.find({ email: email, password: password }).then((user) => {
-    if (user) {
-      bcrypt.compare(password, user.password).then((match) => {
-        if (match) {
-          res.status(200).json({
-            status: "You have successfully logged in",
-          });
-        } else {
-          res.status(401).json({
-            status: "Invalid email or password",
-          });
-        }
-      });
+  try {
+    const user = await collection.findOne({ email: email });
+    if (user) { // If email is found then check password next 
+      const match = await bcrypt.compare(password, user.password);
+      if (match) { // If password is found then you have successfully logged in if not execute those other two else statements
+        res.status(200).json({
+          status: "You have successfully logged in",
+        });
+      } else { 
+        res.status(401).json({ // If email is not found return this message
+          status: "Invalid email or password",
+        });
+      }
     } else {
-      res.status(401).json({
+      res.status(401).json({ // If password is not found return this message
         status: "Invalid email or password",
       });
     }
-  });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: "An error occurred while trying to login",
+    });
+  }
 });
 
 

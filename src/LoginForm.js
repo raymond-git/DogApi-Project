@@ -13,7 +13,6 @@ function LoginForm() {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
-
  
   // Make a post request to the server frontend.js
   async function handleSubmit(event) {
@@ -90,8 +89,10 @@ function LoginForm() {
           </MDBCol>
 
           <MDBCol col="6" className="mb-5">
-            <div className="d-flex flex-column  justify-content-center gradient-custom-2 h-100 mb-4">
-              <div className="text-white px-3 py-4 p-md-5 mx-md-4">
+            <div className="d-flex flex-column justify-content-center gradient-custom-2 mb-4">
+            <img id="dogHome" src="/dogHome.png" alt="dogimage"/>
+              {/* <div className="text-white px-3 py-4 p-md-5 mx-md-4">
+              
                 <h4 className="mb-4">Find the type of dogs you want to see</h4>
                 <p className="small mb-0" >
                   Browsing through dogs on a website can be a fun and rewarding
@@ -100,7 +101,7 @@ function LoginForm() {
                   You can browse through different breeds to find the one that
                   best fits your lifestyle and personality.
                 </p>
-              </div>
+              </div> */}
             </div>
           </MDBCol>
         </MDBRow>
