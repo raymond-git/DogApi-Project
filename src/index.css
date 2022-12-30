@@ -18,16 +18,14 @@ code {
 .gradient-custom-2 {
   /* fallback for old browsers */
   background: #fccb90;
-
   /* Chrome 10-25, Safari 5.1-6 */
   background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 }
 
 /* Bootstrap css for login page */
-@media (min-width: 769px) {
+@media (min-width: 1000px) {
   .gradient-form {
     height: 100vh !important;
   }
@@ -40,29 +38,14 @@ code {
   }
 }
 
-@media (min-width: 769px) {
+@media screen and (min-device-width : 768px) {
   .my-5 {
     /* border: solid 2px black; */
-    right: 15%;
-    bottom: -48px;
-    position: absolute;
-    padding-right: 40px;
-  }
-
-  .mb-5 {
-    margin-top: 10rem !important;
-  }
-
-  .pb-1 {
-    padding-bottom: 2rem !important;
+    padding-top: 100px;
   }
 
   #dogHome {
-    top: 150px;
-    width: 440px;
-    height: 544px;
-    margin-left: 155px;
-    position: absolute;
+    margin-top: -85px;
   }
 }
 
@@ -84,7 +67,6 @@ button:active {
   border-color: orange;
   box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
 }
-
 
 /* Dog breed dropdown menu */
 #dropdownmenu {

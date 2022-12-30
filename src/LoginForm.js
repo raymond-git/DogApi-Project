@@ -44,12 +44,8 @@ function LoginForm() {
           <MDBCol col="6" className="mb-5">
             <div className="d-flex flex-column ms-5">
               <div className="text-center">
-                <img
-                  id="dogLogo"
-                  src="/doglogo.png"
-                  style={{ width: "185px" }}
-                  alt="logo"
-                />
+                <img src="/doglogo.png" style={{ width: "185px" }} alt="logo" />
+                {/* <h4 className="mt-1 mb-5 pb-1">We are dog lovers</h4> */}
               </div>
 
               <p>Please login to your account</p>
@@ -63,7 +59,6 @@ function LoginForm() {
                   value={email}
                   onChange={handleEmailChange}
                 />
-
                 <MDBInput
                   wrapperClass="mb-4"
                   placeholder="Password"
@@ -73,29 +68,34 @@ function LoginForm() {
                   onChange={handlePasswordChange}
                 />
 
-                <div className="text-center pt-1 pb-1">
-                  <button className="mb-4 w-100 gradient-custom-2 length">
+                <div className="text-center pt-1 mb-5 pb-1">
+                  <MDBBtn className="mb-4 w-100 gradient-custom-2">
                     Log in
-                  </button>
-
+                  </MDBBtn>
                   <a className="text-muted" href="#!">
                     Forgot password?
                   </a>
                 </div>
               </Form>
-
               <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">
                 <p className="mb-0">Don't have an account?</p>
                 <MDBBtn outline className="mx-2" color="danger">
-                  Create New
+                  Create Account
                 </MDBBtn>
               </div>
             </div>
           </MDBCol>
 
           <MDBCol col="6" className="mb-5">
-            <div className="d-flex flex-column justify-content-center mb-4">
-              <img id="dogHome" src="/dogHome.png" alt="dogimage" />
+            <div className="d-flex justify-content-center h-100 mb-4">
+              <img
+                className="text-white px-3 py-4 p-md-5 mx-md-4"
+                id="dogHome"
+                src="/dogHome.png"
+                width="580"
+                height="640"
+                alt="dogimage"
+              />
             </div>
           </MDBCol>
         </MDBRow>
