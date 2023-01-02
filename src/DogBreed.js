@@ -24,7 +24,7 @@ function DogBreed(){
         fetctDog();
     }, [])
 
-
+      
 
     // Select Dropdown option
     const [dogImage, setDogImage] = useState();
@@ -74,7 +74,7 @@ function DogBreed(){
                 id="contain-image"
                 src={specificImage}
                 key={specificImage}
-                style={{ width: "288px", height: "300px", objectFit: "cover" }}
+                style={{ width: "380px", height: "300px", objectFit: "cover" }}
                 alt="Dog Images"
               ></img>
             ))}

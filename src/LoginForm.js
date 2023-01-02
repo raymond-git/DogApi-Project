@@ -69,9 +69,9 @@ function LoginForm() {
                 />
 
                 <div className="text-center pt-1 mb-5 pb-1">
-                  <MDBBtn className="mb-4 w-100 gradient-custom-2">
+                  <button className="mb-4 w-100 gradient-custom-2 loginButton">
                     Log in
-                  </MDBBtn>
+                  </button>
                   <a className="text-muted" href="#!">
                     Forgot password?
                   </a>

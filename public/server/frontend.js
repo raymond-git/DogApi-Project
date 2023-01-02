@@ -1,11 +1,12 @@
 const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
-mongoose.set('strictQuery', false); // Add this if you don't want to use the old behavior 
+mongoose.set("strictQuery", false); // Add this if you don't want to use the old behavior
 const MongoClient = require("mongodb").MongoClient;
 const bodyParser = require("body-parser");
 const User = require("./models/user"); // Access models folder/user.js file to use in this server side
 const bcrypt = require("bcrypt"); // Hash password for security reason
+const { findOne } = require("./models/user");
 const app = express();
 
 app.use(cors());
@@ -18,7 +19,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
 // Set up the connection to the mongoDB database
 mongoose.connect("mongodb://localhost:27017").then(() => {
   const port = process.env.PORT || 3002;
@@ -26,7 +26,6 @@ mongoose.connect("mongodb://localhost:27017").then(() => {
     console.log(`Server listening on port ${port}`);
   });
 });
-
 
 // Check to see if connected to MongoDB database
 const url = "mongodb://127.0.0.1:27017";
@@ -40,23 +39,26 @@ client
     console.log("Can not connect to the database", error);
   });
 
+app.post("/signup", async (req, res) => {
+  const { email, password } = req.body;
+  const hashpassword = await bcrypt.hash(password, 10); //Hashed the user's password when signing up
+  const user = new User({
+    email: email,
+    password: hashpassword,
+  });
 
-  app.post("/signup", async (req, res) => {
-    const { email, password } = req.body;
-    const hashpassword = await bcrypt.hash(password, 10); //Hashed the user's password when signing up
-    const user = new User({
-      email: email,
-      password: hashpassword,
-    });
-    user.save((error) => { // Save user information to mongoDB database
-      if (error) {
-        res.status(500).send(error);
-      } else {
-        res.send("You have successfully registered your account");
-      }
-    })
-  })
-
+  user.save((error) => {
+    // Save user information to mongoDB database
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.status(202).json({
+        status: "Success",
+        message: "You have successfully registered your account",
+      });
+    }
+  });
+});
 
 // Server sends user form request to the client
 app.post("/login", async (req, res) => {
@@ -66,19 +68,24 @@ app.post("/login", async (req, res) => {
   const collection = db.collection("signups");
   try {
     const user = await collection.findOne({ email: email });
-    if (user) { // If email is found then check password next 
+    if (user) {
+      // If email is found then check password next
       const match = await bcrypt.compare(password, user.password);
-      if (match) { // If password is found then you have successfully logged in if not execute those other two else statements
+      if (match) {
+        // If password is found then you have successfully logged in if not execute those other two else statements
         res.status(200).json({
           status: "You have successfully logged in",
+          
         });
-      } else { 
-        res.status(401).json({ // If email is not found return this message
+      } else {
+        res.status(401).json({
+          // If email is not found return this message
           status: "Invalid email or password",
         });
       }
     } else {
-      res.status(401).json({ // If password is not found return this message
+      res.status(401).json({
+        // If password is not found return this message
         status: "Invalid email or password",
       });
     }
@@ -89,7 +96,6 @@ app.post("/login", async (req, res) => {
     });
   }
 });
-
 
 // Server sends selected breed to client side
 app.get("/dogbreed", (req, res) => {
