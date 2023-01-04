@@ -16,6 +16,420 @@ code {
     monospace;
 }
 
+
+/* ----------------Homepage 1st Container---------------- */
+
+#container {
+  margin-top: 24px;
+  overflow: hidden;
+  /* background-color: pink; */
+}
+
+.wrap {
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.push {
+  margin-right: auto;
+}
+
+.doglogo {
+  width: 130px;
+  height: 105px;
+  margin-left: 0;
+}
+
+.responsive_nav {
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  max-height: 0;
+  overflow: hidden;
+}
+
+.responsive_nav.show {
+  max-height: 1000px;
+}
+
+.hamburger_menu {
+  display: none;
+}
+
+@media (max-width: 640px) {
+
+  .login,
+  .signup {
+    display: none;
+  }
+
+  .hamburger_menu {
+    display: block;
+    padding: 20px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: #FD4B1D;
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 640px) {
+
+  .login,
+  .signup {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+.login {
+  background: #FD4B1D;
+  border-radius: 42px;
+  width: 160px;
+  height: 54px;
+  margin-right: 20px;
+  margin-top: 24px;
+  border-color: #FD4B1D;
+  color: white;
+  border: 0;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.signup {
+  width: 160px;
+  height: 54px;
+  background: #FD4B1D;
+  border-radius: 42px;
+  margin-right: 20px;
+  margin-top: 24px;
+  border-color: #FD4B1D;
+  color: white;
+  border: 0;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+
+/* ----------------Homepage 2nd Container---------------- */
+
+.wrap2 {
+  margin-top: 80px;
+}
+
+.mainTitle {
+  margin-top: 80px;
+  text-align: left;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 58px;
+  line-height: 87px;
+  color: #424242;
+}
+
+.title-description {
+  margin-top: 30px;
+  text-align: left;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  color: #424242;
+}
+
+.buttonPadding {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-start;
+  width: 396px;
+  height: 60px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.browseButton {
+  width: 183px;
+  height: 60px;
+  left: 122px;
+  top: 524px;
+  background: #FD4B1D;
+  border-radius: 50px;
+  border: 0;
+  color: white;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.learnMoreButton {
+  box-sizing: border-box;
+  width: 183px;
+  height: 60px;
+  border: 1px solid rgba(253, 75, 29, 0.9);
+  border-radius: 50px;
+  color: rgba(253, 75, 29, 0.9);
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  background-color: white;
+}
+
+.main-Image {
+  width: 467px;
+  height: 500px;
+  border-radius: 250px;
+  object-fit: cover;
+  float: right;
+}
+
+
+/* ----------------Homepage 3rd Container---------------- */
+
+.wrap3 {
+  margin-top: 127px;
+}
+
+.sub-title {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 87px;
+  color: #424242;
+}
+
+.sub-title {
+  font-size: 36px;
+}
+
+.sub-description {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: justify;
+  color: #424242;
+}
+
+
+/* ----------------Homepage 4th Container---------------- */
+
+.wrap4 {
+  margin-top: 203px;
+}
+
+.sub-title2 {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 87px;
+  color: #424242;
+}
+
+#dogImages-padding {
+  margin-top: 30px;
+  display: row;
+  gap: 136px;
+}
+
+.dog-Image {
+  width: 266px;
+  height: 247px;
+  border-radius: 250px;
+}
+
+.dog-Image2 {
+  width: 266px;
+  height: 247px;
+  border-radius: 250px;
+}
+
+.dog-Image3 {
+  width: 266px;
+  height: 247px;
+  border-radius: 250px;
+}
+
+/* .dog-Image-Border {
+  border: black solid 1px;
+}
+
+.dog-Image-Border2 {
+  border: black solid 1px;
+}
+
+.dog-Image-Border3 {
+  border: black solid 1px;
+} */
+
+.dog-Description {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: justify;
+  color: #424242;
+  margin-top: 30px;
+}
+
+.dog-Description2 {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: justify;
+  color: #424242;
+  margin-top: 30px;
+}
+
+.dog-Description3 {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: justify;
+  color: #424242;
+  margin-top: 30px;
+}
+
+
+/* ----------------Homepage 5th Container---------------- */
+.circle {
+  position: absolute;
+  width: 102px;
+  height: 99px;
+  left: 1216px;
+  top: 1981px;
+  border-radius: 50%;
+  background: rgba(17, 42, 65, 0.9);
+}
+
+.circle-text {
+  color: white;
+  position: absolute;
+  width: 56px;
+  height: 44px;
+  left: 1283px;
+  top: 2018px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.wrap5 {
+  margin-top: 290px;
+}
+
+.footer {
+  border: solid black 1px;
+  height: 355px;
+  left: 0;
+  right: 0;
+}
+
+.col-sm {}
+
+/* ----------------Homepage Responsive---------------- */
+
+@media (max-width: 800px) {
+
+  .mainTitle {
+    font-size: 32px;
+    line-height: 50px;
+    margin: 10px;
+  }
+
+  .title-description {
+    font-size: 16px;
+    margin: 10px;
+    margin-top: 30px;
+  }
+
+  .browseButton {
+    height: 50px;
+  }
+
+  .learnMoreButton {
+    height: 50px;
+  }
+
+  .buttonPadding {
+    width: 78vw;
+    margin: 10px;
+    margin-top: 30px;
+    display: row;
+    gap: 10px;
+  }
+
+  /* styles to apply when the viewport is 768px or smaller */
+  .main-Image {
+    margin-top: 20px;
+    width: 93vw;
+    max-height: 360px;
+    border-radius: 250px;
+    object-fit: cover;
+    float: right;
+  }
+
+  .sub-title {
+    font-size: 32px;
+  }
+
+  .sub-description {
+    font-size: 16px;
+    margin: 10px;
+  }
+
+  .sub-title2 {
+    font-size: 32px;
+  }
+
+  .dog-Description {
+    font-size: 16px;
+  }
+
+  .dog-Description2 {
+    font-size: 16px;
+  }
+
+  .dog-Description3 {
+    font-size: 16px;
+  }
+
+  #dogImages-padding {
+    margin-top: 30px;
+    display: column;
+    gap: 60px;
+  }
+}
+
+
+/* Bootstrap css for login page */
 .gradient-custom-2 {
   /* fallback for old browsers */
   background: #fccb90;
@@ -25,8 +439,6 @@ code {
   background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 }
 
-
-/* Bootstrap css for login page */
 @media (min-width: 1000px) {
   .gradient-form {
     height: 100vh !important;
@@ -51,8 +463,10 @@ code {
   }
 }
 
-/* LoginForm and SignupForm Page Buttons  */
-.loginButton, .signupButton{
+/*----------------LoginForm and SignupForm Page Buttons----------------*/
+
+.loginButton,
+.signupButton {
   color: white;
   padding: 6px 12px;
   line-height: 32px;
@@ -61,7 +475,8 @@ code {
   box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
 }
 
-.loginButton:active, .signupButton:active{
+.loginButton:active,
+.signupButton:active {
   color: white;
   padding: 6px 12px;
   line-height: 32px;
@@ -71,7 +486,8 @@ code {
 }
 
 
-/* Dog breed dropdown menu */
+/*----------------Dog breed dropdown menu----------------*/
+
 #dropdownmenu {
   top: 10%;
   width: 20%;
@@ -91,191 +507,8 @@ code {
   background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 }
 
-.dogImages{
+.dogImages {
   position: absolute;
   top: 20%;
   left: 15.1%;
 }
-
-
-
-
-
-/* ----------Homepage 1st Container---------- */
-
-#container {
-  display: flex;
-  padding: 10px;
-  border: black solid 1px;
-  margin-top: 24px;
-  overflow: hidden;
-}
-
-.push{
-  margin-right: auto;
-}
-
-.doglogo {
-  border: black solid 1px;
-  width: 130px;
-  height: 105px;
-  margin-left: 0;
-}
-
-.responsive_nav {
-  display: flex;
-  flex-direction: column;
-  transition: all 0.3s ease;
-  max-height: 0;
-  overflow: hidden;
-  /* padding-top: 20px; */
-}
-
-.responsive_nav.show {
-  max-height: 1000px;
-}
-
-.hamburger_menu {
-  display: none;
-}
-
-@media (max-width: 640px) {
-  .login,
-  .signup {
-    display: none;
-  }
-  .hamburger_menu {
-    display: block;
-    padding: 20px;
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    color: #FD4B1D;
-    font-size: 1.8rem;
-  }
-}
-
-@media (min-width: 640px) {
-  .login,
-  .signup {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-}
-
-.login{
-  background: #FD4B1D;
-  border-radius: 42px;
-  width: 160px;
-  height: 54px;
-  margin-right: 20px;
-  margin-top: 24px;
-  border-color: #FD4B1D;
-  color: white;
-  border: 0;
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-}
-
-.signup{
-  width: 160px;
-  height: 54px;
-  background: #FD4B1D;
-  border-radius: 42px;
-  margin-right: 20px;
-  margin-top: 24px;
-  border-color: #FD4B1D;
-  color: white;
-  border: 0;
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-}
-
-
-
-
-/* ----------Homepage 2nd Container---------- */
-
-.container{
-  border: black solid 1px;
-}
-
-.padding {
-  width: 710px;
-  height: 382px;
-  border: solid black 1px;
-} 
-
-.mainTitle {
-  width: 710px;
-  height: 174px;
-  display: flex;
-  justify-content: flex-start;
-  text-align: left;
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 58px;
-  line-height: 87px;
-  color: #424242;
-}
-
-.secondaryTitle {
-  width: 586px;
-  height: 60px;
-  text-align: left;
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 30px;
-  color: #424242;
-} 
-
- .browseButton {
-  width: 183px;
-  height: 60px;
-  left: 122px;
-  top: 534px;
-  background: #FD4B1D;
-  border-radius: 50px;
-}
-
-.learnMore {
-  box-sizing: border-box;
-  width: 183px;
-  height: 60px;
-  border: 1px solid rgba(253, 75, 29, 0.9);
-  border-radius: 50px;
-}
-
-.buttonPadding{
-  display: flex;
-  justify-content: flex-start;
-  width: 396px;
-  height: 60px; 
-  margin-top: 20px;
-} 
-
- .main-Image {
-   width: 400px;
-   height: 380px;
-   border-radius: 250px;
-   object-fit: cover;
- }
-
- .imagePadding {
-  display: flex;
-  justify-content: flex-end;
-  width: 1208px;
-  left: 851px;
-  top: 180px;
-  border: black solid 1px;
-} 
