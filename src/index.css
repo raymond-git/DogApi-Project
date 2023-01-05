@@ -315,44 +315,133 @@ code {
 
 
 /* ----------------Homepage 5th Container---------------- */
-.circle {
-  position: absolute;
-  width: 102px;
-  height: 99px;
-  left: 1216px;
-  top: 1981px;
-  border-radius: 50%;
-  background: rgba(17, 42, 65, 0.9);
-}
-
-.circle-text {
-  color: white;
-  position: absolute;
-  width: 56px;
-  height: 44px;
-  left: 1283px;
-  top: 2018px;
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 22px;
-  text-align: center;
-  color: #FFFFFF;
-}
 
 .wrap5 {
   margin-top: 290px;
 }
 
 .footer {
-  border: solid black 1px;
+  background: #112A41;
   height: 355px;
-  left: 0;
-  right: 0;
 }
 
-.col-sm {}
+#footer-padding {
+  margin-left: 122px;
+  margin-right: 122px;
+}
+
+.footer-border {
+  margin-top: 52px;
+  height: 209px;
+}
+
+.footer-border2 {
+  margin-top: 54px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  text-align: right;
+  gap: 20px;
+}
+
+.footer-border3 {
+  margin-top: 54px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  text-align: right;
+  gap: 20px;
+}
+
+a {
+  gap: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+.footer-mainBorder {
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.footer-title {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 35px;
+  line-height: 42px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.footer-logo {
+  width: 58px;
+  height: 45px;
+}
+
+.footer-subtitleBorder {
+  margin-top: 12px;
+}
+
+.footer-lorem {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #FFFFFF;
+  text-align: justify;
+}
+
+.footer-socialMedia {
+  width: 140.67px;
+  height: 24px;
+  display: flex;
+  gap: 18px;
+}
+
+.fa {
+  padding: 5px;
+  font-size: 12px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+}
+
+.fa:hover {
+  opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+hr {
+  background: #FFFFFF;
+  border: 3px solid #FFFFFF;
+  transform: rotate(-180deg);
+  margin-left: 135px;
+  margin-right: 135px;
+  margin-top: 32px;
+}
 
 /* ----------------Homepage Responsive---------------- */
 
@@ -407,6 +496,7 @@ code {
 
   .sub-title2 {
     font-size: 32px;
+    margin-top: -40px;
   }
 
   .dog-Description {
@@ -426,8 +516,43 @@ code {
     display: column;
     gap: 60px;
   }
-}
 
+  .footer {
+    height: auto;
+  }
+
+  .footer-title {
+    font-size: 32px;
+  }
+
+  #footer-padding {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+
+  .footer-border2 {
+    text-align: left;
+  }
+
+  .footer-border3 {
+    text-align: left;
+  }
+
+  .footer-socialMedia {
+    margin-top: 28px;
+    width: 140.67px;
+    height: 24px;
+    gap: 18px;
+  }
+
+  .horizontal-line {
+    background: #FFFFFF;
+    border: 3px solid #FFFFFF;
+    transform: rotate(-180deg);
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+}
 
 /* Bootstrap css for login page */
 .gradient-custom-2 {
