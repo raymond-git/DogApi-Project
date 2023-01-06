@@ -97,11 +97,27 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Server sends selected breed to client side
-app.get("/dogbreed", (req, res) => {
+//Server sends selected breed to client side
+app.post("/dogbreed", (req, res) => {
   const BreedValues = req.query.value;
   const dogImageUrl = `https://dog.ceo/api/breed/${BreedValues}/images/random`;
   fetch(dogImageUrl, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+});
+
+
+app.post("/dogBreed", (req, res) => {
+  const subBreedUrl = 'https://dog.ceo/api/breeds/image/random';
+  fetch(subBreedUrl, {
     method: "GET",
   })
     .then((response) => response.json())
