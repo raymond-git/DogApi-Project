@@ -116,8 +116,8 @@ app.post("/dogbreed", (req, res) => {
 
 
 app.post("/dogBreed", (req, res) => {
-  const subBreedUrl = 'https://dog.ceo/api/breeds/image/random';
-  fetch(subBreedUrl, {
+  const randomImageUrl = 'https://dog.ceo/api/breeds/image/random';
+  fetch(randomImageUrl, {
     method: "GET",
   })
     .then((response) => response.json())
