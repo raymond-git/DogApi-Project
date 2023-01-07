@@ -1,25 +1,12 @@
-import React, { useRef } from "react";
-import { FaBars } from "react-icons/fa";
+import React, { } from "react";
+import NavBar from "./Component/NavBar";
 
 function Home() {
-  const nav = useRef();
-  const showNavbar = () => {
-    console.log("Show navbar called");
-    nav.current.classList.toggle("responsive_nav");
-  };
-
   return (
     <div>
       <div className="container" id="container">
-        <div className="wrap">
-          <img className="doglogo push" src="/doglogo.png" alt="logo"></img>
-          <button className="login">Login</button>
-          <button className="signup">Sign Up</button>
-          <button className="hamburger_menu" onClick={showNavbar}>
-            <FaBars />
-          </button>
-        </div>
-
+       {/* Navbar links calling from Component/Navbar.js */}
+        <NavBar></NavBar> 
         <div className="wrap2">
           <div className="row">
             <div class="col-sm">

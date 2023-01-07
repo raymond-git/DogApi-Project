@@ -75,7 +75,6 @@ app.post("/login", async (req, res) => {
         // If password is found then you have successfully logged in if not execute those other two else statements
         res.status(200).json({
           status: "You have successfully logged in",
-          
         });
       } else {
         res.status(401).json({
@@ -99,8 +98,8 @@ app.post("/login", async (req, res) => {
 
 //Server sends selected breed to client side
 app.post("/dogbreed", (req, res) => {
-  const BreedValues = req.query.value;
-  const dogImageUrl = `https://dog.ceo/api/breed/${BreedValues}/images/random`;
+  const BreedName = req.query.value;
+  const dogImageUrl = `https://dog.ceo/api/breed/${BreedName}/images/random/3`;
   fetch(dogImageUrl, {
     method: "GET",
   })
@@ -114,9 +113,8 @@ app.post("/dogbreed", (req, res) => {
     });
 });
 
-
 app.post("/dogBreed", (req, res) => {
-  const randomImageUrl = 'https://dog.ceo/api/breeds/image/random';
+  const randomImageUrl = "https://dog.ceo/api/breeds/image/random";
   fetch(randomImageUrl, {
     method: "GET",
   })

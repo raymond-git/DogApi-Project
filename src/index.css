@@ -22,7 +22,7 @@ code {
 #container {
   margin-top: 24px;
   overflow: hidden;
-  /* background-color: pink; */
+  background-color: pink;
 }
 
 .wrap {
@@ -611,29 +611,50 @@ hr {
 }
 
 
-/*----------------Dog breed dropdown menu----------------*/
+/*----------------Dog breed dropdown menus----------------*/
+
+.dogBreed-title {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 87px;
+  color: #424242;
+  margin-top: 87px;
+}
+
+#option-wrap {
+  width: 770px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: solid black 1px;
+  margin-top: 65px;
+}
 
 #dropdownmenu {
-  top: 10%;
-  width: 20%;
-  right: 65%;
-  height: 50px;
+  width: 345px;
+  background: #FD4B1D;
+  border: 1px solid #CED4EA;
   color: white;
-  appearance: none;
-  padding: 6px 12px;
+  height: 48px;
   text-align: center;
-  position: absolute;
-  border-radius: 4px;
-  -moz-appearance: none;
-  border-color: orange;
-  -webkit-appearance: none;
-  font-family: sans-serif bold;
-  box-shadow: 3px 2px 22px 1px;
-  background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+}
+
+.randomImageButton {
+  width: 345px;
+  background: #FD4B1D;
+  border: 1px solid #CED4EA;
+  color: white;
+  height: 48px;
+  margin-left: 0;
+  text-align: center;
 }
 
 .dogImages {
-  position: absolute;
-  top: 20%;
-  left: 15.1%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  /* 3 columns, each taking */
+  border: black solid 1px;
 }
