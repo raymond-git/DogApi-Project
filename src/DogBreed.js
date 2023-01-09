@@ -2,42 +2,50 @@ import React, { useEffect, useState } from "react";
 import NavBar from "./Component/NavBar";
 
 function DogBreed() {
-  
-  // Get all list of dogs for option dropdown menu
+  // Get all list of dog names for option dropdown menu
   const [dogBreeds, setDogBreeds] = useState([]);
+
   useEffect(() => {
-    fetch("https://dog.ceo/api/breeds/list/all")
-      .then((response) => response.json())
-      .then((getData) => {
-        const getBreed = Object.keys(getData.message);
+    const fetchDog = async () => {
+      try {
+        const res = await fetch("https://dog.ceo/api/breeds/list/all");
+        const data = await res.json();
+        const getBreed = Object.keys(data.message);
         setDogBreeds(getBreed);
-      });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchDog();
   }, []);
 
   // Populate dog once image is selected
-  const [dogImage, setDogImage] = useState([]);
+  const [dogImages, setDogImages] = useState([]);
   const fetchDogImage = (BreedName) => {
-    fetch(`https://dog.ceo/api/breed/${BreedName}/images/random/3`) // The /3 is populating 3 images per row
-      .then((response) => response.json())
-      .then((getData) => {
-        setDogImage(getData.message);
-      });
+    try {
+      fetch(`https://dog.ceo/api/breed/${BreedName}/images/random/12`) // The /3 is populating 3 images per row
+        .then((response) => response.json())
+        .then((getData) => {
+          setDogImages(getData.message);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     const options = document.getElementById("dropdownmenu");
     if (options != null) {
-      options.addEventListener("change", (event) => {
+      const handler = (event) => {
         const BreedName = event.target.value;
         fetchDogImage(BreedName);
-      });
+      };
+      options.addEventListener("change", handler);
+
+      return () => {
+        options.removeEventListener("change", handler);
+      };
     }
-    return () => {
-      options.removeEventListener("change", (event) => {
-        const BreedName = event.target.value;
-        fetchDogImage(BreedName);
-      });
-    };
   }, []);
 
   // Get random images when click button
@@ -45,10 +53,10 @@ function DogBreed() {
   const [buttonClicked, setButtonClicked] = useState(false);
 
   useEffect(() => {
-    fetch("https://dog.ceo/api/breeds/image/random")
+    fetch("https://dog.ceo/api/breeds/image/random/12")
       .then((response) => response.json())
       .then((getSubBreed) => {
-        setSubBreed(getSubBreed);
+        setSubBreed(getSubBreed.message);
       });
   }, [buttonClicked]);
 
@@ -63,51 +71,52 @@ function DogBreed() {
         <NavBar></NavBar>
 
         <div className="dogBreed-title">Welcome to the dog World</div>
-        <div id="option-wrap" className="row">
-          <div className="col-sm">
-            <select id="dropdownmenu">
-              <option>Please select a breed</option>
-              {dogBreeds.map((breed, uniqueId) => (
-                <option key={uniqueId} value={breed}>
-                  {breed}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div className="option-wrap grid md:grid-cols-1 flex items-center justify-center text-center">
+          <div className="row">
+            <div className="col-sm">
+              <select id="dropdownmenu">
+                <option>Please select a breed</option>
+                {dogBreeds.map((dogBreed, uniqueId) => (
+                  <option 
+                      key={uniqueId} 
+                      value={dogBreed}>
+                     {dogBreed}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <div className="col-sm">
-            <button className="randomImageButton" onClick={handleButtonChange}>
-              {" "}
-              Click Random Image{" "}
-            </button>
+            <div className="col-sm">
+              <button className="randomImageButton" onClick={handleButtonChange}>
+                Generate random images{" "}
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="row">
-          <div className="col-sm">
-            <div className="dogImages">
-              {dogImage.map((specificImage) => (
-                <img
-                  id="contain-image"
-                  src={specificImage}
-                  key={specificImage}
-                  style={{
-                    width: "380px",
-                    height: "300px",
-                    objectFit: "cover",
-                  }}
-                  alt="Dog Images"
-                ></img>
-              ))}
-            </div>
+        <div className="position-dog">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
+            {dogImages.map((dogImage, uniqueId2) => (
+              <img
+                id="contain-image"
+                src={dogImage}
+                key={uniqueId2}
+                style={{ width: "345px", height: "354px", objectFit: "cover" }}
+                alt="Dog Images"
+              ></img>
+            ))}
           </div>
-          <div className="col-sm">
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
+          {subBreed.map((breed, uniqueId3) => (
             <img
-              src={subBreed.message}
+              src={breed}
+              key={uniqueId3}
               alt="random dog"
               style={{ width: "380px", height: "300px", objectFit: "cover" }}
             ></img>
-          </div>
+          ))}
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ function Home() {
         <NavBar></NavBar> 
         <div className="wrap2">
           <div className="row">
-            <div class="col-sm">
+            <div className="col-sm">
               <div className="mainTitle">
                 We care about dogs as much as you do.
               </div>
@@ -22,7 +22,7 @@ function Home() {
                 <button className="learnMoreButton">Learn More</button>
               </div>
             </div>
-            <div class="col-sm">
+            <div className="col-sm">
               <img
                 className="main-Image"
                 src="/holdingDog.png"
@@ -53,11 +53,11 @@ function Home() {
 
         <div className="wrap4">
           <div className="sub-title2">Dog Images</div>
-          <div id="dogImages-padding" className="row">
+          <div id="dogImages-padding" className="row grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             <div className="col-sm">
               <div className="dog-Image-Border">
                 <img
-                  className="dog-Image"
+                  className="dog-Image mx-auto d-block "
                   src="/dog1.png"
                   alt="holding a dog"
                 ></img>
@@ -71,7 +71,7 @@ function Home() {
             <div className="col-sm">
               <div className="dog-Image-Border2">
                 <img
-                  className="dog-Image2"
+                  className="dog-Image2 mx-auto d-block"
                   src="/dog2.png"
                   alt="holding a dog"
                 ></img>
@@ -84,7 +84,7 @@ function Home() {
             <div className="col-sm">
               <div className="dog-Image-Border3">
                 <img
-                  className="dog-Image3"
+                  className="dog-Image3 mx-auto d-block"
                   src="/dog3.png"
                   alt="holding a dog"
                 ></img>
@@ -100,7 +100,7 @@ function Home() {
 
       <div className="wrap5">
         <div className="footer">
-          <div id="footer-padding" class="row">
+          <div id="footer-padding" className="row">
             <div className="col-sm">
               <div className="footer-border">
                 <div className="footer-mainBorder">
@@ -118,28 +118,28 @@ function Home() {
                 <div className="footer-socialMedia">
                   <a
                     href="https://www.facebook.com/"
-                    class="fa fa-facebook"
+                    className="fa fa-facebook"
                     aria-label="Facebook"
                   >
                     {""}
                   </a>
                   <a
                     href="https://www.instagram.com/"
-                    class="fa fa-instagram"
+                    className="fa fa-instagram"
                     aria-label="Instagram"
                   >
                     {""}
                   </a>
                   <a
                     href="https://twitter.com/i/flow/login"
-                    class="fa fa-twitter"
+                    className="fa fa-twitter"
                     aria-label="Twitter"
                   >
                     {""}
                   </a>
                   <a
                     href="https://www.linkedin.com/"
-                    class="fa fa-linkedin"
+                    className="fa fa-linkedin"
                     aria-label="LinkedIn"
                   >
                     {""}

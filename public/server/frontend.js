@@ -114,7 +114,7 @@ app.post("/dogbreed", (req, res) => {
 });
 
 app.post("/dogBreed", (req, res) => {
-  const randomImageUrl = "https://dog.ceo/api/breeds/image/random";
+  const randomImageUrl = "https://dog.ceo/api/breeds/image/random/12";
   fetch(randomImageUrl, {
     method: "GET",
   })
