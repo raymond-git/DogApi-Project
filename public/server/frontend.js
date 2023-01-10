@@ -97,33 +97,33 @@ app.post("/login", async (req, res) => {
 });
 
 //Server sends selected breed to client side
-app.post("/dogbreed", (req, res) => {
-  const BreedName = req.query.value;
-  const dogImageUrl = `https://dog.ceo/api/breed/${BreedName}/images/random/3`;
-  fetch(dogImageUrl, {
-    method: "GET",
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      res.json(data);
-    })
-    .catch((error) => {
-      console.error(error);
-      res.sendStatus(500);
-    });
-});
+// app.post("/dogbreed", (req, res) => {
+//   const BreedName = req.query.value;
+//   const dogImageUrl = `https://dog.ceo/api/breed/${BreedName}/images/random/3`;
+//   fetch(dogImageUrl, {
+//     method: "GET",
+//   })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       res.json(data);
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//       res.sendStatus(500);
+//     });
+// });
 
-app.post("/dogBreed", (req, res) => {
-  const randomImageUrl = "https://dog.ceo/api/breeds/image/random/12";
-  fetch(randomImageUrl, {
-    method: "GET",
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      res.json(data);
-    })
-    .catch((error) => {
-      console.error(error);
-      res.sendStatus(500);
-    });
-});
+// app.post("/dogBreed", (req, res) => {
+//   const randomImageUrl = "https://dog.ceo/api/breeds/image/random/12";
+//   fetch(randomImageUrl, {
+//     method: "GET",
+//   })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       res.json(data);
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//       res.sendStatus(500);
+//     });
+// });

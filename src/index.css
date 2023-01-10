@@ -33,6 +33,7 @@ code {
   width: auto;
   display: flex;
   justify-content: space-between;
+  /* border: solid black 1px; */
 }
 
 .push {
@@ -128,6 +129,7 @@ code {
 
 .wrap2 {
   margin-top: 80px;
+  border: solid black 1px;
 }
 
 .mainTitle {
@@ -678,4 +680,41 @@ hr {
   margin-top: 58px;
   display: flex;
   justify-content: space-evenly;
+}
+
+
+/*----------------Search Breed Page----------------*/
+.search-title {
+  width: 517px;
+  height: 87px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 87px;
+  color: #424242;
+  display: inline;
+  text-align: center;
+}
+
+/* .search-bar {
+  display: block;
+  width: 922px;
+  height: 48px;
+  text-align: left;
+} */
+
+/* .searchbar-border {
+  margin-top: 35px;
+  border: solid black 1px;
+  display: flex;
+  justify-content: center;
+} */
+
+.dog-card-color {
+  background-color: #AE3110;
+}
+
+.go-back-button {
+  background-color: #FD4B1D;
 }
