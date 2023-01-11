@@ -5,20 +5,22 @@ import Footer from "../Component/Footer";
 function DogBreed() {
   // Get all list of dog names for option dropdown menu
   const [dogBreeds, setDogBreeds] = useState([]);
+  const fetchDog = async () => {
+    try {
+      const res = await fetch("https://dog.ceo/api/breeds/list/all");
+      const data = await res.json();
+      const getBreed = Object.keys(data.message);
+      setDogBreeds(getBreed);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchDog = async () => {
-      try {
-        const res = await fetch("https://dog.ceo/api/breeds/list/all");
-        const data = await res.json();
-        const getBreed = Object.keys(data.message);
-        setDogBreeds(getBreed);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchDog();
   }, []);
+  //--------------------------------------------------------
+
 
   // Populate dog once image is selected
   const [dogImages, setDogImages] = useState([]);
@@ -34,20 +36,22 @@ function DogBreed() {
     }
   };
 
+  const handler = (event) => {
+    const BreedName = event.target.value;
+    fetchDogImage(BreedName);
+  };
+
   useEffect(() => {
     const options = document.getElementById("dropdownmenu");
     if (options != null) {
-      const handler = (event) => {
-        const BreedName = event.target.value;
-        fetchDogImage(BreedName);
-      };
       options.addEventListener("change", handler);
 
       return () => {
         options.removeEventListener("change", handler);
       };
     }
-  }, []);
+  });
+  //--------------------------------------------------------
 
   // Get random images when click button
   const [subBreed, setSubBreed] = useState([]);
@@ -65,12 +69,13 @@ function DogBreed() {
     setButtonClicked(!buttonClicked);
   };
 
+  //--------------------------------------------------------
+
   return (
     <div>
       <div className="container" id="container">
         {/* Navbar links calling from Component/Navbar.js */}
         <NavBar></NavBar>
-
         <div className="dogBreed-title">Welcome to the dog World</div>
         <div className="option-wrap grid md:grid-cols-1 flex items-center justify-center text-center">
           <div className="row">
@@ -78,17 +83,18 @@ function DogBreed() {
               <select id="dropdownmenu">
                 <option>Please select a breed</option>
                 {dogBreeds.map((dogBreed, uniqueId) => (
-                  <option 
-                      key={uniqueId} 
-                      value={dogBreed}>
-                     {dogBreed}
+                  <option key={uniqueId} value={dogBreed}>
+                    {dogBreed}
                   </option>
                 ))}
               </select>
             </div>
 
             <div className="col-sm">
-              <button className="randomImageButton" onClick={handleButtonChange}>
+              <button
+                className="randomImageButton"
+                onClick={handleButtonChange}
+              >
                 Generate random images{" "}
               </button>
             </div>

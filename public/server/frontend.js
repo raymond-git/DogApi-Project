@@ -52,6 +52,7 @@ app.post("/signup", async (req, res) => {
     if (error) {
       res.status(500).send(error);
     } else {
+      // res.redirect('/login');
       res.status(202).json({
         status: "Success",
         message: "You have successfully registered your account",
