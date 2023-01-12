@@ -129,7 +129,6 @@ code {
 
 .wrap2 {
   margin-top: 80px;
-  border: solid black 1px;
 }
 
 .mainTitle {
@@ -693,8 +692,10 @@ hr {
   font-size: 40px;
   line-height: 87px;
   color: #424242;
-  display: inline;
+  display: inline-block;
   text-align: center;
+  white-space: nowrap;
+  margin-bottom: -60px;
 }
 
 /* .search-bar {

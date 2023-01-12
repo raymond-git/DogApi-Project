@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBInput } from "mdb-react-ui-kit";
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function SignupForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -13,6 +15,10 @@ function SignupForm() {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
+  const handleRedirectLogin = () => {
+    navigate("/login")
+  }
 
   // Make a post request to the server frontend.js
   async function handleSubmit(event) {
@@ -30,6 +36,9 @@ function SignupForm() {
     })
       .then((response) => response.json())
       .then((data) => {
+        if(data.status === "Success"){
+          navigate('/login')
+        }
         console.log(data);
       })
       .catch(() => {
@@ -78,6 +87,14 @@ function SignupForm() {
                   </a>
                 </div>
               </Form>
+
+              <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">
+                <p className="mb-0">Have an account?</p>
+                <MDBBtn onClick={handleRedirectLogin} outline className="mx-2" color="danger">
+                  Go to Login
+                </MDBBtn>
+
+              </div>
             </div>
           </MDBCol>
 

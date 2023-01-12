@@ -1,12 +1,15 @@
+require('dotenv').config()
 const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false); // Add this if you don't want to use the old behavior
 const MongoClient = require("mongodb").MongoClient;
 const bodyParser = require("body-parser");
+const {findOne} = require("./models/user")
 const User = require("./models/user"); // Access models folder/user.js file to use in this server side
 const bcrypt = require("bcrypt"); // Hash password for security reason
-const { findOne } = require("./models/user");
+const jwt = require('jsonwebtoken');
+const { Navigate } = require('react-router-dom');
 const app = express();
 
 app.use(cors());
@@ -39,63 +42,74 @@ client
     console.log("Can not connect to the database", error);
   });
 
-app.post("/signup", async (req, res) => {
-  const { email, password } = req.body;
-  const hashpassword = await bcrypt.hash(password, 10); //Hashed the user's password when signing up
-  const user = new User({
-    email: email,
-    password: hashpassword,
-  });
 
-  user.save((error) => {
-    // Save user information to mongoDB database
-    if (error) {
-      res.status(500).send(error);
-    } else {
-      // res.redirect('/login');
-      res.status(202).json({
-        status: "Success",
-        message: "You have successfully registered your account",
+  app.post("/signup", async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res.status(400).json({
+          status: "Email already exists"
+        });
+      }
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const userCredential = new User({ 
+        email: email, 
+        password: hashedPassword 
+      });
+      
+      await userCredential.save();
+      res.status(201).json({ 
+        status: "Success", 
+        message: "You have successfully registered your account!"
+      });
+
+    } catch (error) {
+      res.status(500).json({ 
+        status: "Error", 
+        message: error.message 
       });
     }
   });
-});
+
 
 // Server sends user form request to the client
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  const secretKey = process.env.SECRET_KEY;
   const dbName = "test";
   const db = client.db(dbName);
   const collection = db.collection("signups");
+
   try {
-    const user = await collection.findOne({ email: email });
-    if (user) {
-      // If email is found then check password next
-      const match = await bcrypt.compare(password, user.password);
-      if (match) {
-        // If password is found then you have successfully logged in if not execute those other two else statements
-        res.status(200).json({
-          status: "You have successfully logged in",
-        });
-      } else {
-        res.status(401).json({
-          // If email is not found return this message
-          status: "Invalid email or password",
-        });
-      }
-    } else {
+    const userCredential = await collection.findOne({ email: email });
+    if(!userCredential){
       res.status(401).json({
-        // If password is not found return this message
-        status: "Invalid email or password",
+        status: "Invalid email or password"
       });
     }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      status: "An error occurred while trying to login",
+    const match = await bcrypt.compare(password, userCredential.password);
+    if(!match){
+      res.status(401).json({
+        status: "Invalid email or password"
+      });
+    }
+    const verifyToken = jwt.sign({ email: email }, secretKey, { expiresIn: '1hr' });
+    return res.status(200).json({
+      // status: "You have successfully logged in",
+      verifyToken
     });
+
+  } catch(error){
+    if(error instanceof jwt.JsonWebTokenError){
+      res.status(401).json({
+        status: "Invalid Token"
+      });
+    }
   }
-});
+
+  const token = req.headers["authorization"]
+}); 
 
 //Server sends selected breed to client side
 // app.post("/dogbreed", (req, res) => {

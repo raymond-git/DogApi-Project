@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { MDBBtn, MDBContainer, MDBRow, MDBCol, MDBInput } from "mdb-react-ui-kit";
 import { Form } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -13,6 +15,10 @@ function LoginForm() {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
+  const handleCreateAccount = () => {
+    navigate("/signup")
+  }
 
   // Make a post request to the server frontend.js
   async function handleSubmit(event) {
@@ -30,6 +36,10 @@ function LoginForm() {
     })
       .then((response) => response.json())
       .then((data) => {
+        if(data.verifyToken){ //if verifyToken exists it means user has been authenticated 
+          localStorage.setItem("secretkey", data.secretKey); // Now the secretkey is stored in localstorage
+          navigate('/welcome');
+        }
         console.log(data);
       })
       .catch(() => {
@@ -79,7 +89,7 @@ function LoginForm() {
               </Form>
               <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">
                 <p className="mb-0">Don't have an account?</p>
-                <MDBBtn outline className="mx-2" color="danger">
+                <MDBBtn onClick={handleCreateAccount} outline className="mx-2" color="danger">
                   Create Account
                 </MDBBtn>
               </div>

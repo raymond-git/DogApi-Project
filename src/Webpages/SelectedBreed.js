@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import NavBar from "../Component/NavBar";
+import NavBarLogged from "../Component/NavBarLogged";
+import Footer from "../Component/Footer";
 
 function SelectedBreed() {
   const [dog, setDog] = useState([]);
@@ -31,10 +32,10 @@ function SelectedBreed() {
 
   return (
     <div>
-      <NavBar></NavBar>
-      <div className="container flex items-center justify-center" id="container">
+      <NavBarLogged></NavBarLogged>
+      <div className="container flex items-center justify-center overflow-x-hidden;" id="container">
         {dog.map((breed) => (
-          <div key={breed.id} className="grid grid-cols-1 md:grid-cols-2 md:place-items-center gap-20 p-8 text-left resizing border-solid border-2 border-grey-50">
+          <div key={breed.id} className="grid grid-cols-1 md:grid-cols-2 md:place-items-center gap-20 p-8 text-left resizing border-solid border-2 border-grey-50 mt-20">
             <img
               src={`https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`}
               alt={breed.name}
@@ -59,6 +60,7 @@ function SelectedBreed() {
           </div>
         ))}
       </div>
+      <Footer></Footer>
     </div>
   );
 }

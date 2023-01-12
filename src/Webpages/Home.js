@@ -1,8 +1,20 @@
 import React from "react";
 import NavBar from "../Component/NavBar";
 import Footer from "../Component/Footer";
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+
+  const navigate = useNavigate();
+
+  const handleBrowseDog = () => {
+    navigate("/login")
+  }
+
+  const handleScroll = () => {
+    window.scroll(0, 850);
+  }
+  
   return (
     <div>
       <div className="container" id="container">
@@ -19,8 +31,8 @@ function Home() {
                 and choose your favorite
               </div>
               <div className="buttonPadding">
-                <button className="browseButton">Browse Dogs</button>
-                <button className="learnMoreButton">Learn More</button>
+                <button onClick={handleBrowseDog} className="browseButton">Browse Dogs</button>
+                <button onClick={handleScroll} className="learnMoreButton">Learn More</button>
               </div>
             </div>
             <div className="col-sm">

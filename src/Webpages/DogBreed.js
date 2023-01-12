@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../Component/NavBar";
+import NavBarLogged from "../Component/NavBarLogged";
 import Footer from "../Component/Footer";
 
 function DogBreed() {
@@ -75,7 +75,7 @@ function DogBreed() {
     <div>
       <div className="container" id="container">
         {/* Navbar links calling from Component/Navbar.js */}
-        <NavBar></NavBar>
+        <NavBarLogged></NavBarLogged>
         <div className="dogBreed-title">Welcome to the dog World</div>
         <div className="option-wrap grid md:grid-cols-1 flex items-center justify-center text-center">
           <div className="row">

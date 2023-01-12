@@ -6,6 +6,7 @@ import DogBreed from "./Webpages/DogBreed";
 import SignupForm from "./Webpages/SignupForm.js";
 import SearchBreed from "./Webpages/SearchBreed.js";
 import SelectedBreed from "./Webpages/SelectedBreed.js";
+import HomeLogged from "./Webpages/HomeLogged";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import Testing from "./Testing";
 import React from "react";
@@ -17,6 +18,7 @@ function App() {
         <Routes>
         {/* <Route exact path="/testing" element={<Testing/>} /> */}
           <Route exact path="/" element={<Homepage/>} />
+          <Route exact path="/welcome" element={<HomeLogged/>} />
           <Route exact path="/login" element={<LoginForm/>}/>
           <Route exact path="/signup" element={<SignupForm/>} />
           <Route exact path="/dogbreed" element={<DogBreed/>} />
