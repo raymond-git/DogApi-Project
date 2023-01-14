@@ -53,7 +53,8 @@ function DogBreed() {
   });
   //--------------------------------------------------------
 
-  // Get random images when click button
+
+  // Get random images when click generate button
   const [subBreed, setSubBreed] = useState([]);
   const [buttonClicked, setButtonClicked] = useState(false);
 
@@ -68,7 +69,6 @@ function DogBreed() {
   const handleButtonChange = () => {
     setButtonClicked(!buttonClicked);
   };
-
   //--------------------------------------------------------
 
   return (

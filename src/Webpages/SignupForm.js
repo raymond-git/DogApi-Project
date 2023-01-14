@@ -30,12 +30,60 @@ function SignupForm() {
         password: password,
       }),
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())
       .then((data) => {
+    
+        // Making sure previous error message is removed before new error message appeared
+        document.getElementById("error-message").textContent = ""
+        document.getElementById("error-message2").textContent = ""
+        document.getElementById("error-message3").textContent = ""
+        document.getElementById("error-message4").textContent = ""
+        
+        // Validate if email already exists in the MongoDB database by evaluating the 'error' property in the server's
+        if(data.error === "Email already exists, try a new one") {
+          const errorElement = document.getElementById("error-message");
+          if(errorElement.childNodes.length === 0) {
+            const errorMessage = document.createTextNode("Email already exists, try a new one");
+            errorElement.append(errorMessage); 
+            errorElement.style.color = "red"
+          }
+        } 
+
+        // Validate if the provided email input is null by evaluating the 'error' property in the server's
+        if(data.error === "Please enter an email") {
+          const errorElement = document.getElementById("error-message2");
+          if(errorElement.childNodes.length === 0) {
+            const errorMessage = document.createTextNode("Please enter an email");
+            errorElement.append(errorMessage); 
+            errorElement.style.color = "red"
+          }
+        } 
+
+        // Validate if the provided email and password input are null by evaluating the 'error' property in the server's
+        if(data.error === "Please enter valid email and password") {
+          const errorElement = document.getElementById("error-message3");
+          if(errorElement.childNodes.length === 0) {
+            const errorMessage = document.createTextNode("Please enter valid email and password");
+            errorElement.append(errorMessage); 
+            errorElement.style.color = "red"
+          }
+        } 
+     
+        // Validate if the provided password input is null by evaluating the 'error' property in the server's
+        if(data.error === "Please enter a password") {
+          const errorElement = document.getElementById("error-message4");
+          if(errorElement.childNodes.length === 0) {
+            const errorMessage = document.createTextNode("Please enter a password");
+            errorElement.append(errorMessage); 
+            errorElement.style.color = "red"
+          }
+        } 
+
+        // If there are no errors, the user is successfully logged in
         if(data.status === "Success"){
           navigate('/login')
         }
@@ -54,12 +102,13 @@ function SignupForm() {
             <div className="d-flex flex-column ms-5">
               <div className="logo-center">
                 <img src="/doglogo.png" style={{ width: "185px" }} alt="logo" />
-                {/* <h4 className="mt-1 mb-5 pb-1">We are dog lovers</h4> */}
               </div>
-
               <p className="mt-24">Sign up a free account to browse a list of dogs</p>
 
               <Form className="mt-4" onSubmit={handleSubmit}>
+                <span id="error-message"></span>
+                <span id="error-message2"></span>
+                <span id="error-message3"></span>
                 <MDBInput
                   wrapperClass="mb-4"
                   placeholder="Username"
@@ -68,7 +117,7 @@ function SignupForm() {
                   value={email}
                   onChange={handleEmailChange}
                 />
-
+                <span id="error-message4"></span>
                 <MDBInput
                   wrapperClass="mb-4"
                   placeholder="Password"
@@ -77,23 +126,15 @@ function SignupForm() {
                   value={password}
                   onChange={handlePasswordChange}
                 />
-
                 <div className="text-center pt-1 mb-5 pb-1">
-                  <button className="mb-4 w-100 gradient-custom-2 signupButton">
-                    Sign Up
-                  </button>
-                  <a className="text-muted" href="#!">
-                    Forgot password?
-                  </a>
+                  <button className="mb-4 w-100 gradient-custom-2 signupButton">Sign Up</button>
+                  <a className="text-muted" href="#!">Forgot password?</a>
                 </div>
               </Form>
 
               <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">
                 <p className="mb-0">Have an account?</p>
-                <MDBBtn onClick={handleRedirectLogin} outline className="mx-2" color="danger">
-                  Go to Login
-                </MDBBtn>
-
+                <MDBBtn onClick={handleRedirectLogin} outline className="mx-2" color="danger">Go to Login</MDBBtn>
               </div>
             </div>
           </MDBCol>

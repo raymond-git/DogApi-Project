@@ -30,16 +30,26 @@ function LoginForm() {
         password: password,
       }),
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
+        "Authorization": `Bearer {token}`//Authenticate user and then pass the token to the server
       },
     })
       .then((response) => response.json())
       .then((data) => {
-        if(data.verifyToken){ //if verifyToken exists it means user has been authenticated 
-          localStorage.setItem("secretkey", data.secretKey); // Now the secretkey is stored in localstorage
-          navigate('/welcome');
+        document.cookie = `token=${data.access_token}; HttpOnly; Secure`
+        navigate("/welcome")
+
+        // Validate client side login form
+        if (data.error === "Please enter valid email and password") {
+          const errorElement = document.getElementById("error-message");
+          if (errorElement.childNodes.length === 0) { // If the length of child nodes is 0, it means that the error message is not present and it appends the error message.
+            const errorMessage = document.createTextNode("Please enter valid email and password");
+            errorElement.appendChild(errorMessage);
+            errorElement.style.color = "red";
+          }
         }
+
         console.log(data);
       })
       .catch(() => {
@@ -55,43 +65,37 @@ function LoginForm() {
             <div className="d-flex flex-column ms-5">
               <div className="logo-center">
                 <img src="/doglogo.png" style={{ width: "185px" }} alt="logo" />
-                {/* <h4 className="mt-1 mb-5 pb-1">We are dog lovers</h4> */}
               </div>
-
               <p className="mt-24">Please login to your account</p>
 
               <Form className="mt-4" onSubmit={handleSubmit}>
+              <span id="error-message"></span>
                 <MDBInput
                   wrapperClass="mb-4"
                   placeholder="Username"
-                  id="form1"
+                  id="email"
                   type="email"
                   value={email}
                   onChange={handleEmailChange}
                 />
+               
                 <MDBInput
                   wrapperClass="mb-4"
                   placeholder="Password"
-                  id="form2"
+                  id="password"
                   type="password"
                   value={password}
                   onChange={handlePasswordChange}
                 />
 
                 <div className="text-center pt-1 mb-5 pb-1">
-                  <button className="mb-4 w-100 gradient-custom-2 loginButton">
-                    Log in
-                  </button>
-                  <a className="text-muted" href="#!">
-                    Forgot password?
-                  </a>
+                  <button className="mb-4 w-100 gradient-custom-2 loginButton">Log in</button>
+                  <a className="text-muted" href="#!">Forgot password?</a>
                 </div>
               </Form>
               <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">
                 <p className="mb-0">Don't have an account?</p>
-                <MDBBtn onClick={handleCreateAccount} outline className="mx-2" color="danger">
-                  Create Account
-                </MDBBtn>
+                <MDBBtn onClick={handleCreateAccount} outline className="mx-2" color="danger">Create Account</MDBBtn>
               </div>
             </div>
           </MDBCol>

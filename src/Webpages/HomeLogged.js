@@ -1,19 +1,18 @@
 import React from "react";
 import Footer from "../Component/Footer";
-import NavBarHome from "../Component/NavBarLogged"
-import { useNavigate } from 'react-router-dom';
+import NavBarHome from "../Component/NavBarLogged";
+import { useNavigate } from "react-router-dom";
 
 function HomeLogged() {
+  const navigate = useNavigate();
 
-const navigate = useNavigate()
+  const handleBrowseDog = () => {
+    navigate("/searchbreed");
+  };
 
-const handleBrowseDog = () => {
-  navigate("/searchbreed");
-};
-
-const handleScroll = () => {
-  window.scroll(0, 850);
-}
+  const handleScroll = () => {
+    window.scroll(0, 850);
+  };
 
   return (
     <div>
@@ -23,16 +22,11 @@ const handleScroll = () => {
         <div className="wrap2">
           <div className="row">
             <div className="col-sm">
-              <div className="mainTitle">
-                We care about dogs as much as you do.
-              </div>
-              <div className="title-description">
-                Join now to browse through a selection of popular dogs breeds
-                and choose your favorite
-              </div>
+              <div className="mainTitle">We care about dogs as much as you do.</div>
+              <div className="title-description">Join now to browse through a selection of popular dogs breeds and choose your favorite</div>
               <div className="buttonPadding">
                 <button onClick={handleBrowseDog} className="browseButton">Browse Dogs</button>
-                <button onClick={handleScroll}className="learnMoreButton">Learn More</button>
+                <button onClick={handleScroll} className="learnMoreButton">Learn More</button>
               </div>
             </div>
             <div className="col-sm">
@@ -66,10 +60,7 @@ const handleScroll = () => {
 
         <div className="wrap4">
           <div className="sub-title2">Dog Images</div>
-          <div
-            id="dogImages-padding"
-            className="row grid grid-cols-1 lg:grid-cols-3"
-          >
+          <div id="dogImages-padding" className="row grid grid-cols-1 lg:grid-cols-3">
             <div className="col-sm">
               <div className="dog-Image-Border">
                 <img

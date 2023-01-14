@@ -10,7 +10,10 @@ const User = require("./models/user"); // Access models folder/user.js file to u
 const bcrypt = require("bcrypt"); // Hash password for security reason
 const jwt = require('jsonwebtoken');
 const { Navigate } = require('react-router-dom');
+const user = require('./models/user');
+const cookieParser = require("cookie-parser");
 const app = express();
+app.use(cookieParser());
 
 app.use(cors());
 app.use(express.json()); // to parse JSON bodies
@@ -42,22 +45,42 @@ client
     console.log("Can not connect to the database", error);
   });
 
-
   app.post("/signup", async (req, res) => {
     try {
       const { email, password } = req.body;
+      // Check and handle error messages on the server side before sending them to the client
       const existingUser = await User.findOne({ email });
       if (existingUser) {
         return res.status(400).json({
-          status: "Email already exists"
+          error: "Email already exists, try a new one",
         });
-      }
+      } 
+
+      if(email.length === 0 && password.length === 0 ) {
+        return res.status(400).json({
+          error: "Please enter valid email and password",
+        });
+    }
+
+      if (!email) {
+        return res.status(400).json({
+          error: "Please enter an email",
+        });
+      } 
+
+      if (!password) {
+        return res.status(400).json({
+          error: "Please enter a password",
+        });
+      } 
+
       const hashedPassword = await bcrypt.hash(password, 10);
       const userCredential = new User({ 
         email: email, 
         password: hashedPassword 
       });
       
+      // If there are no errors, the user's information is successfully stored in the MongoDB database
       await userCredential.save();
       res.status(201).json({ 
         status: "Success", 
@@ -76,40 +99,99 @@ client
 // Server sends user form request to the client
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  const secretKey = process.env.SECRET_KEY;
   const dbName = "test";
   const db = client.db(dbName);
   const collection = db.collection("signups");
+  const secretKey = process.env.SECRET_KEY;
 
   try {
     const userCredential = await collection.findOne({ email: email });
-    if(!userCredential){
-      res.status(401).json({
-        status: "Invalid email or password"
-      });
-    }
-    const match = await bcrypt.compare(password, userCredential.password);
-    if(!match){
-      res.status(401).json({
-        status: "Invalid email or password"
-      });
-    }
-    const verifyToken = jwt.sign({ email: email }, secretKey, { expiresIn: '1hr' });
-    return res.status(200).json({
-      // status: "You have successfully logged in",
-      verifyToken
-    });
 
-  } catch(error){
-    if(error instanceof jwt.JsonWebTokenError){
-      res.status(401).json({
-        status: "Invalid Token"
+    if (!userCredential) {
+      return res.status(401).json({
+        error: "Please enter valid email and password",
       });
     }
+
+    const matchPassword = await bcrypt.compare(password, userCredential.password);
+    if (!matchPassword) {
+     return res.status(401).json({
+        error: "Invalid email or password",
+      });
+    }
+
+    // MongoDb User Id
+    const payload = {
+      id: userCredential._id,
+    };
+
+    // Authenticate user and set token, example:
+    const token = jwt.sign(payload, secretKey, { expiresIn: "1hr" });
+    res.cookie("access_token", token, { 
+      httpPnly: true,
+      secure: true,
+      sameSite: 'Strict'
+    }).status(200).json({
+      message: "Successfully Logged in",
+    });
+  } catch (error) {
+    return res.status(401).json({
+      error: "Invalid Token",
+    });
+  }
+}); 
+
+app.get("/welcome", authenticateToken, (req, res, next) => {
+  res.status(401).json({
+    message: "hello"
+  })
+})
+
+function authenticateToken(req, res, next){
+  const secretKey = process.env.SECRET_KEY;
+  const token = req.cookies.access_token;
+  if (!token) {
+    return res.status(401).json("Token is not found");
   }
 
-  const token = req.headers["authorization"]
-}); 
+  jwt.verify(token, secretKey, (err, payload) => {
+    if (err) {
+      return res.status(403).json("Invalid Token");
+    }
+    req.userCredential = {
+      id: payload.id,
+    };
+    next();
+  });
+}
+
+
+// app.get("/welcome", authenticateToken, (req, res, next) => {
+//   req.storeEmail
+// })
+
+// function authenticateToken(req, res, next) {
+//   const secretKey = process.env.SECRET_KEY;
+//   const authHeader = req.headers['authorization'] // Extract the authorization from client assuming it contains a token
+//   const token = authHeader && authHeader.split(' ')[1] // This is getting the '{Token}` portion from the client side 
+//   if(!token){
+//     return res.status(401).json({
+//       error: "Unauthorized",
+//     })  
+//   }
+
+//   try{
+//     const verifyToken = jwt.verify(token, secretKey);
+//     req.storeEmail = verifyToken.email;
+//     next()
+//   } catch(error){
+//     return res.status(401).json({
+//       message: "Invalid Token"
+//     })
+//   }
+// }
+  
+
 
 //Server sends selected breed to client side
 // app.post("/dogbreed", (req, res) => {

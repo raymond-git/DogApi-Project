@@ -8,11 +8,11 @@ function SearchBreed() {
   const [userInput, setUserInput] = useState("");
   const [searched, setSearched] = useState("false");
 
-  //Get all the breeds
+  //Get all the breeds on the page
   useEffect(() => {
     const fetchBreed = async () => {
       try {
-        const res = await fetch("https://api.thedogapi.com/v1/breeds?limit=12", { //limit to 21 images populated
+        const res = await fetch("https://api.thedogapi.com/v1/breeds?limit=12", {//limit to 21 images populated
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -29,17 +29,22 @@ function SearchBreed() {
     };
     fetchBreed();
   }, []);
+  //--------------------------------------------------------
 
+
+  // Search for a specific dog to populate
   function handleUserChange(event) {
     const userInput = event.target.value;
-      setUserInput(userInput);
+    setUserInput(userInput);
   }
-  
-  // Search for a specific dog to populate
+
   async function handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
     try {
-      const res = await fetch(`https://api.thedogapi.com/v1/breeds/search?q=${userInput}`, { //limit to 21 images populated
+      const res = await fetch(
+        `https://api.thedogapi.com/v1/breeds/search?q=${userInput}`,
+        {
+          //limit to 21 images populated
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -55,33 +60,36 @@ function SearchBreed() {
       console.log(error);
     }
   }
+  //--------------------------------------------------------
 
 
-   //When user backspace no input it pop up dog images again
-   const [originalData, setOriginalData] = useState([]);
-   useEffect(() => {
-     fetch("https://api.thedogapi.com/v1/breeds/?limit=12")
-       .then((res) => res.json())
-       .then((data) => {
-         setOriginalData(data);
-       });
-   }, []);
- 
- const handleClearUser = (event) => {
-   const userInput = event.target.value
-     if(userInput.length === 0){
-       setDogs(originalData);
-     }
-   }
- 
+
+  //When user backspace no input it pop up dog images again
+  const [originalData, setOriginalData] = useState([]);
+  useEffect(() => {
+    fetch("https://api.thedogapi.com/v1/breeds/?limit=12")
+      .then((res) => res.json())
+      .then((data) => {
+        setOriginalData(data);
+      });
+  }, []);
+
+  const handleClearUser = (event) => {
+    const userInput = event.target.value;
+    if (userInput.length === 0) {
+      setDogs(originalData);
+    }
+  };
+  //--------------------------------------------------------
+
   return (
     <div>
       <div className="container" id="container">
-      <NavBarLogged></NavBarLogged>
+        <NavBarLogged></NavBarLogged>
         <h1 className="search-title">Discover Your Perfect Companion</h1>
         <form className="mx-auto mt-10" onSubmit={handleSubmit}>
           <input
-            onInput={handleUserChange}
+            onChange={handleUserChange}
             value={userInput}
             name="search"
             id="search"
@@ -115,7 +123,6 @@ function SearchBreed() {
             ))
           ) : (
             <>
-
               {/* // Return this when user is just looking at the card tile with api data */}
               {dogs.map((dog) => (
                 <Link
@@ -134,34 +141,9 @@ function SearchBreed() {
                     <p>{dog.bred_for}</p>
                   </article>
                 </Link>
-              ))} 
+              ))}
             </>
-          )}    
-
-
-{/* {searched ? (
-            dogs.map((dog) => (
-              <Link
-                to={`/${dog.name}`}
-                key={dog.id}
-                id="click-tiles"
-                className="dog-card-color p-4 rounded px-0 pt-0 hover:bg-white-600 hover:text-white transition duration-300 hover:scale-110"
-              >
-                <article>
-                  <img
-                    className="md:h-72 w-full object-cover"
-                    src={`https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`}
-                    alt={dog.name}
-                  ></img>
-                  <h3 className="font-bold mt-6">{dog.name}</h3>
-                  <p>{dog.bred_for}</p>
-                </article>
-              </Link>
-            ))
-          ) : (
-          <>
-<h1>no found</h1>
-</> )} */}
+          )}
         </div>
       </div>
       <Footer></Footer>

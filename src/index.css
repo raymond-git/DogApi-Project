@@ -271,18 +271,6 @@ code {
   border-radius: 250px;
 }
 
-/* .dog-Image-Border {
-  border: black solid 1px;
-}
-
-.dog-Image-Border2 {
-  border: black solid 1px;
-}
-
-.dog-Image-Border3 {
-  border: black solid 1px;
-} */
-
 .dog-Description {
   font-family: 'Open Sans';
   font-style: normal;
@@ -591,16 +579,16 @@ hr {
 
 /*----------------LoginForm and SignupForm Page Buttons----------------*/
 
-.logo-center{
+.logo-center {
   display: flex;
   justify-content: center;
 }
 
-.overflow-hidden{
- margin-right: 50px;
+.overflow-hidden {
+  margin-right: 50px;
 }
 
-.dog-images-responsive{
+.dog-images-responsive {
   max-width: none;
   overflow-x: hidden;
   margin-right: 20px;
@@ -608,7 +596,7 @@ hr {
 }
 
 @media screen and (max-device-width : 912px) {
-  .dog-images-responsive{
+  .dog-images-responsive {
     width: auto;
   }
 }
@@ -698,24 +686,14 @@ hr {
   margin-bottom: -60px;
 }
 
-/* .search-bar {
-  display: block;
-  width: 922px;
-  height: 48px;
-  text-align: left;
-} */
-
-/* .searchbar-border {
-  margin-top: 35px;
-  border: solid black 1px;
-  display: flex;
-  justify-content: center;
-} */
-
 .dog-card-color {
   background-color: #AE3110;
 }
 
 .go-back-button {
   background-color: #FD4B1D;
+}
+
+.dog-detail-color {
+  color: #112A41;
 }
