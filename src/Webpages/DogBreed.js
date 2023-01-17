@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import NavBarLogged from "../Component/NavBarLogged";
 import Footer from "../Component/Footer";
+import NavBarLogged from "../Component/NavBarLogged";
 
 function DogBreed() {
   // Get all list of dog names for option dropdown menu
@@ -76,9 +76,9 @@ function DogBreed() {
       <div className="container" id="container">
         {/* Navbar links calling from Component/Navbar.js */}
         <NavBarLogged></NavBarLogged>
-        <div className="dogBreed-title">Welcome to the dog World</div>
+        <div className="dogBreed-title">Explore the World of Dogs</div>
         <div className="option-wrap grid md:grid-cols-1 flex items-center justify-center text-center">
-          <div className="row">
+          <div className="row dog-selection">
             <div className="col-sm">
               <select id="dropdownmenu">
                 <option>Please select a breed</option>
@@ -89,7 +89,6 @@ function DogBreed() {
                 ))}
               </select>
             </div>
-
             <div className="col-sm">
               <button className="randomImageButton" onClick={handleButtonChange}>Populate random dog images</button>
             </div>
@@ -110,18 +109,20 @@ function DogBreed() {
           </div>
         </div>
 
+      <div className="generate-dog">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
           {subBreed.map((breed, uniqueId3) => (
             <img
               src={breed}
               key={uniqueId3}
-              alt="random dog"
               style={{ width: "430px", height: "354px", objectFit: "cover" }}
+              alt="random dog"
             ></img>
           ))}
         </div>
       </div>
-      <Footer></Footer>
+    </div>
+    <Footer></Footer>
     </div>
   );
 }

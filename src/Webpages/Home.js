@@ -22,8 +22,8 @@ function Home() {
         <NavBar></NavBar>
         <div className="wrap2">
           <div className="row">
-            <div className="col-sm">
-              <div className="col-sm ml-6 main-title-position">We care about dogs as much as you do.</div>
+            <div className="col-sm ml-6 main-title-position">
+              <div className="mainTitle">We care about dogs as much as you do.</div>
               <div className="title-description">Join now to browse through a selection of popular dogs breeds and choose your favorite</div>
               <div className="buttonPadding">
                 <button onClick={handleBrowseDog} className="browseButton">Browse Dogs</button>
