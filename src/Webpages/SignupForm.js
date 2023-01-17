@@ -17,8 +17,8 @@ function SignupForm() {
   };
 
   const handleRedirectLogin = () => {
-    navigate("/login")
-  }
+    navigate("/login");
+  };
 
   // Make a post request to the server frontend.js
   async function handleSubmit(event) {
@@ -30,62 +30,61 @@ function SignupForm() {
         password: password,
       }),
       headers: {
-        "Accept": "application/json",
+        Accept: "application/json",
         "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())
       .then((data) => {
-    
         // Making sure previous error message is removed before new error message appeared
-        document.getElementById("error-message").textContent = ""
-        document.getElementById("error-message2").textContent = ""
-        document.getElementById("error-message3").textContent = ""
-        document.getElementById("error-message4").textContent = ""
-        
+        document.getElementById("error-message").textContent = "";
+        document.getElementById("error-message2").textContent = "";
+        document.getElementById("error-message3").textContent = "";
+        document.getElementById("error-message4").textContent = "";
+
         // Validate if email already exists in the MongoDB database by evaluating the 'error' property in the server's
-        if(data.error === "Email already exists, try a new one") {
+        if (data.error === "Email already exists, try a new one") {
           const errorElement = document.getElementById("error-message");
-          if(errorElement.childNodes.length === 0) {
+          if (errorElement.childNodes.length === 0) {
             const errorMessage = document.createTextNode("Email already exists, try a new one");
-            errorElement.append(errorMessage); 
-            errorElement.style.color = "red"
+            errorElement.append(errorMessage);
+            errorElement.style.color = "red";
           }
-        } 
+        }
 
         // Validate if the provided email input is null by evaluating the 'error' property in the server's
-        if(data.error === "Please enter an email") {
+        if (data.error === "Please enter an email") {
           const errorElement = document.getElementById("error-message2");
-          if(errorElement.childNodes.length === 0) {
+          if (errorElement.childNodes.length === 0) {
             const errorMessage = document.createTextNode("Please enter an email");
-            errorElement.append(errorMessage); 
-            errorElement.style.color = "red"
+            errorElement.append(errorMessage);
+            errorElement.style.color = "red";
           }
-        } 
+        }
 
         // Validate if the provided email and password input are null by evaluating the 'error' property in the server's
-        if(data.error === "Please enter valid email and password") {
+        if (data.error === "Please enter valid email and password") {
           const errorElement = document.getElementById("error-message3");
-          if(errorElement.childNodes.length === 0) {
+          if (errorElement.childNodes.length === 0) {
             const errorMessage = document.createTextNode("Please enter valid email and password");
-            errorElement.append(errorMessage); 
-            errorElement.style.color = "red"
+            errorElement.append(errorMessage);
+            errorElement.style.color = "red";
           }
-        } 
-     
-        // Validate if the provided password input is null by evaluating the 'error' property in the server's
-        if(data.error === "Please enter a password") {
-          const errorElement = document.getElementById("error-message4");
-          if(errorElement.childNodes.length === 0) {
-            const errorMessage = document.createTextNode("Please enter a password");
-            errorElement.append(errorMessage); 
-            errorElement.style.color = "red"
-          }
-        } 
+        }
 
-        // If there are no errors, the user is successfully logged in
-        if(data.status === "Success"){
-          navigate('/login')
+        // Validate if the provided password input is null by evaluating the 'error' property in the server's
+        if (data.error === "Please enter a password") {
+          const errorElement = document.getElementById("error-message4");
+          if (errorElement.childNodes.length === 0) {
+            const errorMessage = document.createTextNode("Please enter a password");
+            errorElement.append(errorMessage);
+            errorElement.style.color = "red";
+          }
+        }
+
+        // If there are no errors, the user is successfully signed up
+        if (data.status === "Success") {
+          navigate("/login");
         }
         console.log(data);
       })
@@ -134,13 +133,20 @@ function SignupForm() {
 
               <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">
                 <p className="mb-0">Have an account?</p>
-                <MDBBtn onClick={handleRedirectLogin} outline className="mx-2" color="danger">Go to Login</MDBBtn>
+                <MDBBtn
+                  onClick={handleRedirectLogin}
+                  outline
+                  className="mx-2"
+                  color="danger"
+                >
+                  Go to Login
+                </MDBBtn>
               </div>
             </div>
           </MDBCol>
 
           <MDBCol col="6" className="mb-5">
-            <div className="d-flex justify-content-center h-100 mb-4">
+            <div className="d-flex justify-content-center h-100">
               <img
                 className="text-white px-3 py-4 p-md-5 mx-md-4 dog-images-responsive"
                 id="dogHome"

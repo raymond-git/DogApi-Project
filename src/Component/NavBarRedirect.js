@@ -2,7 +2,7 @@ import React from "react";
 import { FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-function NavBarLogged() {
+function NavBarRedirect() {
   const showNavbar = () => {
     const login = document.querySelector('.login');
     const signup = document.querySelector('.signup');
@@ -11,16 +11,16 @@ function NavBarLogged() {
   };
 
   const navigate = useNavigate();
-  const handleLogOut = () => {
-    navigate("/");
+  const handleExplore = () => {
+    navigate("/dogbreed");
   };
 
   const handleLogo = () => {
     navigate("/welcome");
   };
 
-  const handleSearch = () => {
-    navigate("/searchbreed");
+  const handleLogout = () => {
+    navigate("/");
   };
 
   return (
@@ -33,8 +33,8 @@ function NavBarLogged() {
             src="/doglogo.png"
             alt="logo"
           ></img>
-          <button onClick={handleSearch} className="login">Search Breed</button>
-          <button onClick={handleLogOut} className="signup">Logout</button>
+          <button onClick={handleExplore} className="login">Explore More</button>
+          <button onClick={handleLogout} className="signup">Logout</button>
           <button className="hamburger_menu" onClick={showNavbar}><FaBars /></button>
         </div>
       </div>
@@ -42,4 +42,4 @@ function NavBarLogged() {
   );
 }
 
-export default NavBarLogged;
+export default NavBarRedirect;

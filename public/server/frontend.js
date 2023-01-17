@@ -48,6 +48,7 @@ client
   app.post("/signup", async (req, res) => {
     try {
       const { email, password } = req.body;
+      
       // Check and handle error messages on the server side before sending them to the client
       const existingUser = await User.findOne({ email });
       if (existingUser) {
@@ -95,45 +96,44 @@ client
     }
   });
 
+const secretKey = process.env.SECRET_KEY;
 
 // Server sends user form request to the client
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
+
   const dbName = "test";
   const db = client.db(dbName);
   const collection = db.collection("signups");
-  const secretKey = process.env.SECRET_KEY;
-
   try {
     const userCredential = await collection.findOne({ email: email });
-
-    if (!userCredential) {
+    if (!userCredential) { //Check if user exists in the database
       return res.status(401).json({
-        error: "Please enter valid email and password",
+        error: "Please enter a valid email and password",
       });
     }
-
     const matchPassword = await bcrypt.compare(password, userCredential.password);
     if (!matchPassword) {
      return res.status(401).json({
-        error: "Invalid email or password",
+        error: "Please enter a valid email and password",
       });
     }
 
-    // MongoDb User Id
-    const payload = {
+    const payload = { // MongoDb User Id
       id: userCredential._id,
     };
 
-    // Authenticate user and set token, example:
-    const token = jwt.sign(payload, secretKey, { expiresIn: "1hr" });
-    res.cookie("access_token", token, { 
-      httpPnly: true,
+    const token = jwt.sign(payload, secretKey);   // Authenticate user and set token, example:
+
+    res.cookie('token', token, { //Store token in cookie
+      httpOnly: true,
       secure: true,
-      sameSite: 'Strict'
-    }).status(200).json({
-      message: "Successfully Logged in",
-    });
+      sameSite: 'None'
+    })
+    res.status(201).send({
+      authenticated: "Token is set in the http=only and secure cookie"
+    })
+
   } catch (error) {
     return res.status(401).json({
       error: "Invalid Token",
@@ -141,58 +141,30 @@ app.post("/login", async (req, res) => {
   }
 }); 
 
-app.get("/welcome", authenticateToken, (req, res, next) => {
-  res.status(401).json({
-    message: "hello"
-  })
-})
 
-function authenticateToken(req, res, next){
-  const secretKey = process.env.SECRET_KEY;
-  const token = req.cookies.access_token;
-  if (!token) {
-    return res.status(401).json("Token is not found");
-  }
-
-  jwt.verify(token, secretKey, (err, payload) => {
-    if (err) {
-      return res.status(403).json("Invalid Token");
-    }
-    req.userCredential = {
-      id: payload.id,
-    };
-    next();
-  });
-}
-
-
-// app.get("/welcome", authenticateToken, (req, res, next) => {
-//   req.storeEmail
-// })
-
-// function authenticateToken(req, res, next) {
-//   const secretKey = process.env.SECRET_KEY;
-//   const authHeader = req.headers['authorization'] // Extract the authorization from client assuming it contains a token
-//   const token = authHeader && authHeader.split(' ')[1] // This is getting the '{Token}` portion from the client side 
-//   if(!token){
-//     return res.status(401).json({
-//       error: "Unauthorized",
-//     })  
+// app.get("/welcome", (req, res, next) => {
+//   const authHeader = req.header('Authorization');
+//   const token = authHeader.split(' ')[1];
+//   if (authHeader && authHeader.split(' ')[0] === 'Bearer' && token) {
+//     try {
+//       jwt.verify(token, secretKey);
+      
+//       res.status(200).json({
+//         message: 'All good'
+//       });
+//     } catch (err) {
+//       res.status(401).json({
+//         message: "Invalid or expired token"
+//       });
+//     }
+//   } else {
+//     res.status(401).json({
+//       message: "Invalid token"
+//     });
 //   }
+// });
 
-//   try{
-//     const verifyToken = jwt.verify(token, secretKey);
-//     req.storeEmail = verifyToken.email;
-//     next()
-//   } catch(error){
-//     return res.status(401).json({
-//       message: "Invalid Token"
-//     })
-//   }
-// }
   
-
-
 //Server sends selected breed to client side
 // app.post("/dogbreed", (req, res) => {
 //   const BreedName = req.query.value;

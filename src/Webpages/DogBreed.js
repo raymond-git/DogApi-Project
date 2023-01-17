@@ -91,12 +91,7 @@ function DogBreed() {
             </div>
 
             <div className="col-sm">
-              <button
-                className="randomImageButton"
-                onClick={handleButtonChange}
-              >
-                Generate random images{" "}
-              </button>
+              <button className="randomImageButton" onClick={handleButtonChange}>Populate random dog images</button>
             </div>
           </div>
         </div>
@@ -108,7 +103,7 @@ function DogBreed() {
                 id="contain-image"
                 src={dogImage}
                 key={uniqueId2}
-                style={{ width: "345px", height: "354px", objectFit: "cover" }}
+                style={{ width: "430px", height: "354px", objectFit: "cover" }}
                 alt="Dog Images"
               ></img>
             ))}
@@ -121,7 +116,7 @@ function DogBreed() {
               src={breed}
               key={uniqueId3}
               alt="random dog"
-              style={{ width: "380px", height: "300px", objectFit: "cover" }}
+              style={{ width: "430px", height: "354px", objectFit: "cover" }}
             ></img>
           ))}
         </div>

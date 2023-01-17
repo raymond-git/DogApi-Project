@@ -1,6 +1,5 @@
 @import '~bootstrap/dist/css/bootstrap.css';
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,6 +26,7 @@ code {
   margin-top: 24px;
   overflow: hidden;
   /* background-color: pink; */
+ 
 }
 
 .wrap {
@@ -46,24 +46,12 @@ code {
   margin-left: 0;
 }
 
-.responsive_nav {
-  display: flex;
-  flex-direction: column;
-  transition: all 0.3s ease;
-  max-height: 0;
-  overflow: hidden;
-}
-
-.responsive_nav.show {
-  max-height: 1000px;
-}
-
 .hamburger_menu {
   display: none;
 }
 
+/* Show hamburger menu when screen size is less than or equal to 640px */
 @media (max-width: 640px) {
-
   .login,
   .signup {
     display: none;
@@ -77,6 +65,15 @@ code {
     border: none;
     color: #FD4B1D;
     font-size: 1.8rem;
+    max-height: 10px;
+  }
+
+  .login.show {
+    display: block;
+  }
+  
+  .signup.show {
+    display: block;
   }
 }
 
@@ -541,6 +538,10 @@ hr {
     margin-left: 24px;
     margin-right: 24px;
   }
+
+  .main-title-position {
+    margin-left: 8px;
+  }
 }
 
 /* Bootstrap css for login page */
@@ -631,7 +632,7 @@ hr {
   font-size: 40px;
   line-height: 87px;
   color: #424242;
-  margin-top: 87px;
+  margin-top: 46px;
 }
 
 .option-wrap {
@@ -648,7 +649,6 @@ hr {
   height: 48px;
   text-align: center;
   justify-self: flex-start;
-  /* margin-left: 340px; */
 }
 
 .randomImageButton {
@@ -660,7 +660,6 @@ hr {
   margin-left: 0;
   text-align: center;
   justify-self: flex-end;
-  /* margin-right: 340px; */
 }
 
 .position-dog {
@@ -669,21 +668,41 @@ hr {
   justify-content: space-evenly;
 }
 
+.generate-dog{
+  margin-top: 42px;
+  display: flex;
+  justify-content: space-evenly; 
+}
+
+.dog-selection {
+  display: flex;
+  gap: 60px;
+ }
+/* ---------------dogbreed Page Responsive----------- */
+@media (max-width: 800px) {
+  .dog-selection {
+   display: flex;
+   gap: 20px;
+  }
+
+  .dogBreed-title {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 50px;
+    color: #424242;
+  }
+}
+
 
 /*----------------Search Breed Page----------------*/
 .search-title {
-  width: 517px;
-  height: 87px;
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
   font-size: 40px;
-  line-height: 87px;
   color: #424242;
-  display: inline-block;
-  text-align: center;
-  white-space: nowrap;
-  margin-bottom: -60px;
 }
 
 .dog-card-color {
@@ -696,4 +715,20 @@ hr {
 
 .dog-detail-color {
   color: #112A41;
+}
+
+.more-button {
+  width: 119px;
+  height: 48px;
+  background-color: #FD4B1D;
+}
+
+@media (max-width: 800px) {
+  .search-title {
+   font-size: 32px;
+   font-family: 'Open Sans';
+   font-style: normal;
+   font-weight: 600;
+   line-height: 50px;
+  }
 }

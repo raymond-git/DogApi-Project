@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import NavBarLogged from "../Component/NavBarLogged";
+import NavBarRedirect from "../Component/NavBarRedirect";
 import { Link } from "react-router-dom";
 import Footer from "../Component/Footer";
 
@@ -85,8 +85,9 @@ function SearchBreed() {
   return (
     <div>
       <div className="container" id="container">
-        <NavBarLogged></NavBarLogged>
-        <h1 className="search-title">Discover Your Perfect Companion</h1>
+        <NavBarRedirect></NavBarRedirect>
+        
+        <h1 className="search-title mt-12">Discover Your Perfect Companion</h1>
         <form className="mx-auto mt-10" onSubmit={handleSubmit}>
           <input
             onChange={handleUserChange}
@@ -99,7 +100,7 @@ function SearchBreed() {
             onKeyUp={handleClearUser}
           ></input>
         </form>
-
+       
         <div className="grid grid: cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 my-12 p-8 text-white mt-30">
           {/* Return true when the user submits a search query and the second API call is made, it maps over the new "dogs" state which now contains the search results and displays the search results */}
           {!searched ? (
