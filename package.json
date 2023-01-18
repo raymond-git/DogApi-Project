@@ -22,6 +22,7 @@
     "mdb-react-ui-kit": "^5.1.0",
     "mongodb": "^4.13.0",
     "mongoose": "^6.8.1",
+    "netlify-lambda": "^2.0.15",
     "path-browserify": "^1.0.1",
     "postcss-loader": "^7.0.2",
     "react": "^18.2.0",
@@ -36,9 +37,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && netlify-lambda build functions", 
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "pm2": "pm2"
+   
   },
   "eslintConfig": {
     "extends": [
