@@ -3,7 +3,7 @@ const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false); // Add this if you don't want to use the old behavior
-const MongoClient = require("mongodb").MongoClient;
+const MongoClient = require("mongodb").MongoClient
 const bodyParser = require("body-parser");
 const {findOne} = require("./models/user")
 const User = require("./models/user"); // Access models folder/user.js file to use in this server side
@@ -26,6 +26,18 @@ app.use((req, res, next) => {
 });
 
 
+// const MongoClient = require('mongodb').MongoClient;
+// const dbURI = "mongodb+srv://ray5354:!Aznboi123@cluster0.a4hncvs.mongodb.net/test?retryWrites=true&w=majority";
+// const clients = new MongoClient(dbURI, { useNewUrlParser: true });
+// clients.connect((err) => {
+//     if(err) throw err;
+//     console.log("Connected to MongoDB Atlas");
+//     // perform actions on the client object
+//     clients.close();
+// });
+
+
+
 const dbURI = process.env.MONGODB_URI;
 const dbPassword = process.env.MONGODB_PASSWORD;
 
@@ -45,22 +57,6 @@ mongoose.connect(dbURI, {
     });
   })
   .catch(err => console.log(err));
-
-// const dbURI = process.env.MONGODB_URI;
-// const dbPassword = process.env.MONGODB_PASSWORD;
-
-// mongoose.connect(dbURI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// })
-//   .then(() => {
-//     console.log("MongoDB Connected");
-//     const port = process.env.PORT || 3002;
-//     app.listen(port, () => {
-//       console.log(`Server listening on port ${port}`);
-//     });
-//   })
-//   .catch(err => console.log(err));
 
 
 // Set up the connection to the mongoDB database
