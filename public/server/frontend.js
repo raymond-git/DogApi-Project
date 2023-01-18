@@ -25,13 +25,51 @@ app.use((req, res, next) => {
   next();
 });
 
+
+const dbURI = process.env.MONGODB_URI;
+const dbPassword = process.env.MONGODB_PASSWORD;
+
+mongoose.connect(dbURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  auth: {
+    username: "ray5354",
+    password: dbPassword
+  }
+})
+  .then(() => {
+    console.log("MongoDB Connected");
+    const port = process.env.PORT || 3002;
+    app.listen(port, () => {
+      console.log(`Server listening on port ${port}`);
+    });
+  })
+  .catch(err => console.log(err));
+
+// const dbURI = process.env.MONGODB_URI;
+// const dbPassword = process.env.MONGODB_PASSWORD;
+
+// mongoose.connect(dbURI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// })
+//   .then(() => {
+//     console.log("MongoDB Connected");
+//     const port = process.env.PORT || 3002;
+//     app.listen(port, () => {
+//       console.log(`Server listening on port ${port}`);
+//     });
+//   })
+//   .catch(err => console.log(err));
+
+
 // Set up the connection to the mongoDB database
-mongoose.connect("mongodb://localhost:27017").then(() => {
-  const port = process.env.PORT || 3002;
-  app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
-  });
-});
+// mongoose.connect("mongodb://localhost:27017").then(() => {
+//   const port = process.env.PORT || 3002;
+//   app.listen(port, () => {
+//     console.log(`Server listening on port ${port}`);
+//   });
+// });
 
 // Check to see if connected to MongoDB database
 const url = "mongodb://127.0.0.1:27017";
