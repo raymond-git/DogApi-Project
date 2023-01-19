@@ -60,7 +60,8 @@ mongoose.connect(dbURI, {
 
 
 // Set up the connection to the mongoDB database
-// mongoose.connect("mongodb://localhost:27017").then(() => {
+// mongoose.connect("mongodb://127.0.0.1:27017").then(() => {
+// // mongoose.connect("mongodb://localhost:27017").then(() => {
 //   const port = process.env.PORT || 3002;
 //   app.listen(port, () => {
 //     console.log(`Server listening on port ${port}`);
