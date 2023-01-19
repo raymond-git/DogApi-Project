@@ -129,12 +129,12 @@ app.post("/login", async (req, res) => {
   const collection = db.collection("signups");
   try {
     const userCredential = await collection.findOne({ email: email });
-    // const userCredential = await Amplify.DataStore.query(User, c => c.email("eq", email));
     if (!userCredential) { //Check if user exists in the database
       return res.status(401).json({
         error: "Please enter a valid email and password",
       });
     }
+    console.log(userCredential);
     const matchPassword = await bcrypt.compare(password, userCredential.password);
     if (!matchPassword) {
      return res.status(401).json({
