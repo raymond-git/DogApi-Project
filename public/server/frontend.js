@@ -51,7 +51,7 @@ mongoose.connect(dbURI, {
 })
   .then(() => {
     console.log("MongoDB Connected");
-    const port = process.env.PORT || 3002;
+    const port = process.env.PORT || 3003;
     app.listen(port, () => {
       console.log(`Server listening on port ${port}`);
     });
@@ -137,11 +137,12 @@ const secretKey = process.env.SECRET_KEY;
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  const dbName = "test";
-  const db = client.db(dbName);
-  const collection = db.collection("signups");
+  // const dbName = "test";
+  // const db = client.db(dbName);
+  // const collection = db.collection("signups");
   try {
-    const userCredential = await collection.findOne({ email: email });
+    // const userCredential = await collection.findOne({ email: email });
+    const userCredential = await Amplify.DataStore.query(User, c => c.email("eq", email));
     if (!userCredential) { //Check if user exists in the database
       return res.status(401).json({
         error: "Please enter a valid email and password",
