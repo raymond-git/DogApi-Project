@@ -25,19 +25,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
-// const MongoClient = require('mongodb').MongoClient;
-// const dbURI = "mongodb+srv://ray5354:!Aznboi123@cluster0.a4hncvs.mongodb.net/test?retryWrites=true&w=majority";
-// const clients = new MongoClient(dbURI, { useNewUrlParser: true });
-// clients.connect((err) => {
-//     if(err) throw err;
-//     console.log("Connected to MongoDB Atlas");
-//     // perform actions on the client object
-//     clients.close();
-// });
-
-
-
 const dbURI = process.env.MONGODB_URI;
 const dbPassword = process.env.MONGODB_PASSWORD;
 
@@ -51,7 +38,7 @@ mongoose.connect(dbURI, {
 })
   .then(() => {
     console.log("MongoDB Connected");
-    const port = process.env.PORT || 3003;
+    const port = process.env.PORT || 3001;
     app.listen(port, () => {
       console.log(`Server listening on port ${port}`);
     });
@@ -137,12 +124,12 @@ const secretKey = process.env.SECRET_KEY;
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  // const dbName = "test";
-  // const db = client.db(dbName);
-  // const collection = db.collection("signups");
+  const dbName = "test";
+  const db = client.db(dbName);
+  const collection = db.collection("signups");
   try {
-    // const userCredential = await collection.findOne({ email: email });
-    const userCredential = await Amplify.DataStore.query(User, c => c.email("eq", email));
+    const userCredential = await collection.findOne({ email: email });
+    // const userCredential = await Amplify.DataStore.query(User, c => c.email("eq", email));
     if (!userCredential) { //Check if user exists in the database
       return res.status(401).json({
         error: "Please enter a valid email and password",
