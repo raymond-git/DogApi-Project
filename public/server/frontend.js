@@ -15,9 +15,9 @@ const cookieParser = require("cookie-parser");
 const app = express();
 app.use(cookieParser());
 
-app.use(cors({
-  origin: '*'
-}));
+// app.use(cors({
+//   origin: '*'
+// }));
 app.use(express.json()); // to parse JSON bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,6 +26,15 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Content-Type"); // The value "Content-Type" allows the Content type header to be included in the request. Fixed Post request
   next();
 });
+
+const cors=require("cors");
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions)) // Use this after the variable declaration
 
 const dbURI = process.env.MONGODB_URI;
 const dbPassword = process.env.MONGODB_PASSWORD;
