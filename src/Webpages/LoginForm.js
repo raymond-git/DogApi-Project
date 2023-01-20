@@ -46,24 +46,19 @@ function LoginForm() {
       .then((response) => response.json())
       .then((data) => {
 
+        // Validate client side login form
         if (data.error) {
+          const errorElement = document.getElementById("error-message");
+          errorElement.innerHTML = data.error;
+          errorElement.style.color = "red";
+          errorElement.style.display = "block";
           navigate("/login");
         } else {
           if (data.authenticated) {
             navigate("/welcome");
+            console.log("successs")
           }
         }
-
-        // Validate client side login form
-        if (data.error === "Please enter a valid email and password") {
-          const errorElement = document.getElementById("error-message");
-          if (errorElement.childNodes.length === 0) { // If the length of child nodes is 0, it means that the error message is not present and it appends the error message.
-            const errorMessage = document.createTextNode("Please enter a valid email and password");
-            errorElement.appendChild(errorMessage);
-            errorElement.style.color = "red";
-          }
-        }
-
         console.log(data);
       })
       .catch(() => {
@@ -83,7 +78,7 @@ function LoginForm() {
               <p className="mt-24">Please login to your account</p>
 
               <Form className="mt-4" onSubmit={handleSubmit}>
-                <span id="error-message"></span>
+              <span className="error" id="error-message"></span>
                 <MDBInput
                   wrapperClass="mb-4"
                   placeholder="Username"

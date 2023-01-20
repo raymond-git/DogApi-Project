@@ -9,9 +9,8 @@ const {findOne} = require("./models/user")
 const User = require("./models/user"); // Access models folder/user.js file to use in this server side
 const bcrypt = require("bcrypt"); // Hash password for security reason
 const jwt = require('jsonwebtoken');
-const { Navigate } = require('react-router-dom');
-const user = require('./models/user');
 const cookieParser = require("cookie-parser");
+const validator = require('validator');
 const app = express();
 app.use(cookieParser());
 
@@ -48,7 +47,7 @@ mongoose.connect(dbURI, {
 })
   .then(() => {
     console.log("MongoDB Connected");
-    const port = process.env.PORT || 3001;
+    const port = process.env.PORT || 3002;
     app.listen(port, () => {
       console.log(`Server listening on port ${port}`);
     });
@@ -132,22 +131,27 @@ const secretKey = process.env.SECRET_KEY;
 
 // Server sends user form request to the client
 app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-
-  const dbName = "test";
-  const db = client.db(dbName);
-  const collection = db.collection("signups");
   try {
+    const { email, password } = req.body;
+    if (!validator.isEmail(email)) {
+      return res.status(401).json({
+        error: "Please enter a valid email address",
+      });
+    }
+    const dbName = "test";
+    const db = client.db(dbName);
+    const collection = db.collection("signups");
     const userCredential = await collection.findOne({ email: email });
+
     if (!userCredential) { //Check if user exists in the database
       return res.status(401).json({
         error: "Please enter a valid email and password",
       });
     }
- 
+
     const matchPassword = await bcrypt.compare(password, userCredential.password);
     if (!matchPassword) {
-     return res.status(401).json({
+      return res.status(401).json({
         error: "Please enter a valid email and password",
       });
     }
@@ -155,77 +159,22 @@ app.post("/login", async (req, res) => {
     const payload = { // MongoDb User Id
       id: userCredential._id,
     };
-
     const token = jwt.sign(payload, secretKey);   // Authenticate user and set token, example:
 
     res.cookie('token', token, { //Store token in cookie
       httpOnly: true,
       secure: true,
       sameSite: 'None'
-    })
+    });
+
     res.status(201).send({
       authenticated: "Token is set in the http=only and secure cookie"
-    })
+    });
 
+ 
   } catch (error) {
     return res.status(401).json({
-      error: "Invalid Token",
+      invalid: error,
     });
   }
 }); 
-
-
-// app.get("/welcome", (req, res, next) => {
-//   const authHeader = req.header('Authorization');
-//   const token = authHeader.split(' ')[1];
-//   if (authHeader && authHeader.split(' ')[0] === 'Bearer' && token) {
-//     try {
-//       jwt.verify(token, secretKey);
-      
-//       res.status(200).json({
-//         message: 'All good'
-//       });
-//     } catch (err) {
-//       res.status(401).json({
-//         message: "Invalid or expired token"
-//       });
-//     }
-//   } else {
-//     res.status(401).json({
-//       message: "Invalid token"
-//     });
-//   }
-// });
-
-  
-//Server sends selected breed to client side
-// app.post("/dogbreed", (req, res) => {
-//   const BreedName = req.query.value;
-//   const dogImageUrl = `https://dog.ceo/api/breed/${BreedName}/images/random/3`;
-//   fetch(dogImageUrl, {
-//     method: "GET",
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       res.json(data);
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//       res.sendStatus(500);
-//     });
-// });
-
-// app.post("/dogBreed", (req, res) => {
-//   const randomImageUrl = "https://dog.ceo/api/breeds/image/random/12";
-//   fetch(randomImageUrl, {
-//     method: "GET",
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       res.json(data);
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//       res.sendStatus(500);
-//     });
-// });
