@@ -47,7 +47,7 @@ mongoose.connect(dbURI, {
 })
   .then(() => {
     console.log("MongoDB Connected");
-    const port = process.env.PORT || 3002;
+    const port = process.env.PORT || 3001;
     app.listen(port, () => {
       console.log(`Server listening on port ${port}`);
     });
@@ -114,13 +114,13 @@ client
       
       // If there are no errors, the user's information is successfully stored in the MongoDB database
       await userCredential.save();
-      res.status(201).json({ 
+      return res.status(201).json({ 
         status: "Success", 
         message: "You have successfully registered your account!"
       });
 
     } catch (error) {
-      res.status(500).json({ 
+      return res.status(500).json({ 
         status: "Error", 
         message: error.message 
       });
