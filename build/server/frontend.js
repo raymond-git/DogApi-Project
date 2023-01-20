@@ -9,8 +9,6 @@ const {findOne} = require("./models/user")
 const User = require("./models/user"); // Access models folder/user.js file to use in this server side
 const bcrypt = require("bcrypt"); // Hash password for security reason
 const jwt = require('jsonwebtoken');
-const { Navigate } = require('react-router-dom');
-const user = require('./models/user');
 const cookieParser = require("cookie-parser");
 const validator = require('validator');
 const app = express();
@@ -169,10 +167,11 @@ app.post("/login", async (req, res) => {
       sameSite: 'None'
     });
 
-    return res.status(201).send({
+    res.status(201).send({
       authenticated: "Token is set in the http=only and secure cookie"
     });
 
+ 
   } catch (error) {
     return res.status(401).json({
       invalid: error,
