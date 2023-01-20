@@ -16,7 +16,7 @@ const app = express();
 app.use(cookieParser());
 
 app.use(cors({
-  origin: 'https://main.dn2x8ssek5rtm.amplifyapp.com',
+  origin: 'https://www.dogbrowsing.com/',
   credentials: true
 }));
 app.use(express.json()); // to parse JSON bodies
