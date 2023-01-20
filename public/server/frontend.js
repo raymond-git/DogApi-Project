@@ -137,7 +137,7 @@ app.post("/login", async (req, res) => {
         error: "Please enter a valid email and password",
       });
     }
-    console.log(userCredential);
+ 
     const matchPassword = await bcrypt.compare(password, userCredential.password);
     if (!matchPassword) {
      return res.status(401).json({
