@@ -2,21 +2,35 @@ import React, { useState } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { Amplify } from 'aws-amplify';
+
+
+
+// Amplify.configure({
+//   Auth: {
+//     region: 'us-west-2',
+//     userPoolId: 'us-west-2_8huwQtHxw',
+//     userPoolWebClientId: 'a3oem26tu2b9iavd825ed19m95q',
+//   },
+//   API: {
+//     endpoints: [
+//       {
+//         name: "REST API",
+//         endpoint: "https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev",
+//         region: "us-west-2"
+//       },
+//     ]
+//   }
+// });
+
 Amplify.configure({
-  Auth: {
-    region: 'us-west-2',
-    userPoolId: 'us-west-2_8huwQtHxw',
-    userPoolWebClientId: 'a3oem26tu2b9iavd825ed19m95q',
-  },
-  API: {
-    endpoints: [
-      {
-        name: "REST API",
-        endpoint: "https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev",
-        region: "us-west-2"
-      },
-    ]
-  }
+  aws_cloud_logic_custom: [
+    {
+      name: 'REST API', // (required) - API Name (This name is used used in the client app to identify the API - API.get('your-api-name', '/path'))
+      endpoint: 'https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev', // (required) -API Gateway URL + environment
+      region: 'us-west-2' // (required) - API Gateway region
+    }
+  ]
 });
 
 function SignupForm() {
