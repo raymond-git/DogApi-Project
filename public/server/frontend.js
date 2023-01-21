@@ -76,6 +76,11 @@ mongoose.connect(dbURI, {
 //     console.log("Can not connect to the database", error);
 //   });
 
+app.get("/", (req, res) => {
+  res.send("hello world")
+});
+
+
   app.post("/signup", async (req, res) => {
     try {
       const { email, password } = req.body;
