@@ -31,6 +31,8 @@ app.use(cors({
   credentials: true
 }));
 
+app.options('*', cors());
+
 const dbURI = process.env.MONGODB_URI;
 const dbPassword = process.env.MONGODB_PASSWORD;
 
@@ -73,17 +75,10 @@ mongoose.connect(dbURI, {
 //     console.log("Can not connect to the database", error);
 //   });
 
-app.get("/", (req, res) => {
-  res.send("hello world")
-});
-
-app.get("/signup", (req, res) => {
-  res.send("hello world")
-});
-
-app.get("/login", (req, res) => {
-  res.send("hello world")
-});
+  app.get("/", (req, res) => {
+    res.send("hello world")
+    console.log("connected to server");
+  });
 
   app.post("/signup", async (req, res) => {
     try {

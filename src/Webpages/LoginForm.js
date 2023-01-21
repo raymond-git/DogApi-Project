@@ -31,7 +31,7 @@ function LoginForm() {
   // Make a post request to the server frontend.js
   async function handleSubmit(event) {
     event.preventDefault();
-    fetch("http://localhost:3002/login", {
+    fetch("https://www.dogbrowsing.com/login", {
       method: "POST",
       body: JSON.stringify({
         email: email,
