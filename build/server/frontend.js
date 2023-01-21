@@ -23,15 +23,14 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors({
-  origin: 'https://www.dogbrowsing.com',
-  optionsSuccessStatus: 200,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'X-Amz-Date', 'Authorization', 'X-Api-Key', 'X-Amz-Security-Token'],
-  credentials: true
-}));
+const cors=require("cors");
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
 
-app.options('*', cors());
+app.use(cors(corsOptions)) // Use this after the variable declaration
 
 const dbURI = process.env.MONGODB_URI;
 const dbPassword = process.env.MONGODB_PASSWORD;
@@ -46,7 +45,7 @@ mongoose.connect(dbURI, {
 })
   .then(() => {
     console.log("MongoDB Connected");
-    const port = process.env.PORT || 443;
+    const port = process.env.PORT || 3002;
     app.listen(port, () => {
       console.log(`Server listening on port ${port}`);
     });
