@@ -59,6 +59,11 @@ function LoginForm(event) {
     setToken(tokenFromCookies);
   }, []);
 
+  
+
+  async function handleSubmit(event) {
+  event.preventDefault();
+
   const apiName = 'Rest API';
   const path = '/login';
   const myInit = {
@@ -73,6 +78,7 @@ function LoginForm(event) {
     },
     response: true,
   };
+
 
   API.post(apiName, path, myInit)
   .then((response) => {
@@ -93,8 +99,7 @@ function LoginForm(event) {
   .catch((error) => {
     console.log(error);
   });
-
-
+}
 
 
   // Make a post request to the server frontend.js
