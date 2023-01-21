@@ -3,7 +3,8 @@ import { MDBBtn, MDBContainer, MDBRow, MDBCol, MDBInput } from "mdb-react-ui-kit
 import { Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
-import { Amplify } from 'aws-amplify';
+import { Amplify, API } from 'aws-amplify';
+
 
 // Amplify.configure({
 //   Auth: {
