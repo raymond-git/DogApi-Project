@@ -31,6 +31,8 @@ app.use(cors({
   credentials: true
 }));
 
+app.options('*', cors());
+
 const dbURI = process.env.MONGODB_URI;
 const dbPassword = process.env.MONGODB_PASSWORD;
 
