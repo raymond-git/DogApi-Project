@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { Amplify } from 'aws-amplify';
 
-
-
 // Amplify.configure({
 //   Auth: {
 //     region: 'us-west-2',
@@ -35,12 +33,8 @@ Amplify.configure({
 });
 
 
-
-
-
-
-
-function LoginForm() {
+function LoginForm(event) {
+  event.preventDefault();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -64,44 +58,82 @@ function LoginForm() {
     setToken(tokenFromCookies);
   }, []);
 
-  // Make a post request to the server frontend.js
-  async function handleSubmit(event) {
-    event.preventDefault();
-    // fetch("https://www.dogbrowsing.com/login", {
-      fetch("https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev/login", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`//Authenticate user and then pass the token to the server
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
+  const apiName = 'Rest API';
+  const path = '/login';
+  const myInit = {
+    body: JSON.stringify({
+      email: email,
+      password: password,
+    }),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    response: true,
+  };
 
-        // Validate client side login form
-        if (data.error) {
-          const errorElement = document.getElementById("error-message");
-          errorElement.innerHTML = data.error;
-          errorElement.style.color = "red";
-          errorElement.style.display = "block";
-          navigate("/login");
-        } else {
-          if (data.authenticated) {
-            navigate("/welcome");
-            console.log("successs")
-          }
-        }
-        console.log(data);
-      })
-      .catch(() => {
-        console.error("Something is wrong with your server");
-      });
-  }
+  API.post(apiName, path, myInit)
+  .then((response) => {
+    // Validate client side login form
+    if (response.error) {
+      const errorElement = document.getElementById("error-message");
+      errorElement.innerHTML = response.error;
+      errorElement.style.color = "red";
+      errorElement.style.display = "block";
+      navigate("/login");
+    } else {
+      if (response.authenticated) {
+        navigate("/welcome");
+        console.log("success")
+      }
+    }
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+
+
+
+  // Make a post request to the server frontend.js
+  // async function handleSubmit(event) {
+  //   event.preventDefault();
+  //   // fetch("https://www.dogbrowsing.com/login", {
+  //     fetch("https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev/login", {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       email: email,
+  //       password: password,
+  //     }),
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //       "Authorization": `Bearer ${token}`//Authenticate user and then pass the token to the server
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+
+  //       // Validate client side login form
+  //       if (data.error) {
+  //         const errorElement = document.getElementById("error-message");
+  //         errorElement.innerHTML = data.error;
+  //         errorElement.style.color = "red";
+  //         errorElement.style.display = "block";
+  //         navigate("/login");
+  //       } else {
+  //         if (data.authenticated) {
+  //           navigate("/welcome");
+  //           console.log("successs")
+  //         }
+  //       }
+  //       console.log(data);
+  //     })
+  //     .catch(() => {
+  //       console.error("Something is wrong with your server");
+  //     });
+  // }
 
   return (
     <div>
