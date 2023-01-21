@@ -26,6 +26,13 @@ import { Amplify, API } from 'aws-amplify';
 Amplify.configure({
   aws_cloud_logic_custom: [
     {
+      Auth: {
+        region: 'us-west-2',
+        userPoolId: 'us-west-2_8huwQtHxw',
+        userPoolWebClientId: 'a3oem26tu2b9iavd825ed19m95q',
+      }
+    },
+    {
       name: 'REST API', // (required) - API Name (This name is used used in the client app to identify the API - API.get('your-api-name', '/path'))
       endpoint: 'https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev', // (required) -API Gateway URL + environment
       region: 'us-west-2' // (required) - API Gateway region
