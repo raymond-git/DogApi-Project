@@ -3,6 +3,30 @@ import { MDBBtn, MDBContainer, MDBRow, MDBCol, MDBInput } from "mdb-react-ui-kit
 import { Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
+import Amplify from 'aws-amplify';
+
+Amplify.configure({
+  Auth: {
+    region: 'us-west-2',
+    userPoolId: 'us-west-2_8huwQtHxw',
+    userPoolWebClientId: 'a3oem26tu2b9iavd825ed19m95q',
+  },
+  API: {
+    endpoints: [
+      {
+        name: "REST API",
+        endpoint: "https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev",
+        region: "us-west-2"
+      },
+    ]
+  }
+});
+
+
+
+
+
+
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -31,7 +55,8 @@ function LoginForm() {
   // Make a post request to the server frontend.js
   async function handleSubmit(event) {
     event.preventDefault();
-    fetch("https://www.dogbrowsing.com/login", {
+    // fetch("https://www.dogbrowsing.com/login", {
+      fetch("https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev/login", {
       method: "POST",
       body: JSON.stringify({
         email: email,
