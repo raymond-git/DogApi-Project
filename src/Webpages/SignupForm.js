@@ -50,6 +50,8 @@ function SignupForm() {
     navigate("/login");
   };
 
+  async function handleSubmit(event) {
+  event.preventDefault();
   const apiName = 'Rest API';
   const path = '/dev/signup';
   const myInit = {
@@ -121,7 +123,7 @@ function SignupForm() {
   .catch(() => {
   console.error("Something is wrong with your server");
   });
-  
+}
 
 
   // Make a post request to the server frontend.js
