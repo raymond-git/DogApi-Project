@@ -65,16 +65,16 @@ mongoose.connect(dbURI, {
 // });
 
 // Check to see if connected to MongoDB database
-const url = "mongodb://127.0.0.1:27017";
-const client = new MongoClient(url);
-client
-  .connect()
-  .then(() => {
-    console.log("Connected to the database");
-  })
-  .catch((error) => {
-    console.log("Can not connect to the database", error);
-  });
+// const url = "mongodb://127.0.0.1:27017";
+// const client = new MongoClient(url);
+// client
+//   .connect()
+//   .then(() => {
+//     console.log("Connected to the database");
+//   })
+//   .catch((error) => {
+//     console.log("Can not connect to the database", error);
+//   });
 
   app.post("/signup", async (req, res) => {
     try {
