@@ -47,7 +47,7 @@ mongoose.connect(dbURI, {
 })
   .then(() => {
     console.log("MongoDB Connected");
-    const port = process.env.PORT || 3002;
+    const port = process.env.PORT || 3001;
     app.listen(port, () => {
       console.log(`Server listening on port ${port}`);
     });
@@ -65,16 +65,16 @@ mongoose.connect(dbURI, {
 // });
 
 // Check to see if connected to MongoDB database
-const url = "mongodb://127.0.0.1:27017";
-const client = new MongoClient(url);
-client
-  .connect()
-  .then(() => {
-    console.log("Connected to the database");
-  })
-  .catch((error) => {
-    console.log("Can not connect to the database", error);
-  });
+// const url = "mongodb://127.0.0.1:27017";
+// const client = new MongoClient(url);
+// client
+//   .connect()
+//   .then(() => {
+//     console.log("Connected to the database");
+//   })
+//   .catch((error) => {
+//     console.log("Can not connect to the database", error);
+//   });
 
   app.post("/signup", async (req, res) => {
     try {
@@ -114,13 +114,13 @@ client
       
       // If there are no errors, the user's information is successfully stored in the MongoDB database
       await userCredential.save();
-      res.status(201).json({ 
+      return res.status(201).json({ 
         status: "Success", 
         message: "You have successfully registered your account!"
       });
 
     } catch (error) {
-      res.status(500).json({ 
+      return res.status(500).json({ 
         status: "Error", 
         message: error.message 
       });
