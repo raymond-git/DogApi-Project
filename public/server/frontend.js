@@ -14,9 +14,6 @@ const validator = require('validator');
 const app = express();
 app.use(cookieParser());
 
-// app.use(cors({
-//   origin: '*'
-// }));
 app.use(express.json()); // to parse JSON bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,13 +23,13 @@ app.use((req, res, next) => {
   next();
 });
 
-// const corsOptions ={
-//    origin:'*', 
-//    credentials:true,            //access-control-allow-credentials:true
-//    optionSuccessStatus:200,
-// }
-
-app.use(cors()) // Use this after the variable declaration
+app.use(cors({
+  origin: 'https://www.dogbrowsing.com',
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'X-Amz-Date', 'Authorization', 'X-Api-Key', 'X-Amz-Security-Token'],
+  credentials: true
+}));
 
 const dbURI = process.env.MONGODB_URI;
 const dbPassword = process.env.MONGODB_PASSWORD;
