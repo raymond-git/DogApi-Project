@@ -4,36 +4,17 @@ import { Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Amplify, API } from 'aws-amplify';
 
-
-
-// Amplify.configure({
-//   Auth: {
-//     region: 'us-west-2',
-//     userPoolId: 'us-west-2_8huwQtHxw',
-//     userPoolWebClientId: 'a3oem26tu2b9iavd825ed19m95q',
-//   },
-//   API: {
-//     endpoints: [
-//       {
-//         name: "REST API",
-//         endpoint: "https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev",
-//         region: "us-west-2"
-//       },
-//     ]
-//   }
-// });
-
 Amplify.configure({
   aws_cloud_logic_custom: [
     {
       Auth: {
         region: 'us-west-2',
         userPoolId: 'us-west-2_8huwQtHxw',
-        userPoolWebClientId: 'a3oem26tu2b9iavd825ed19m95q',
+        userPoolWebClientId: '3oem26tu2b9iavd825ed19m95q',
       }
     },
     {
-      name: 'REST API', // (required) - API Name (This name is used used in the client app to identify the API - API.get('your-api-name', '/path'))
+      name: 'api1b9035b6', // (required) - API Name (This name is used used in the client app to identify the API - API.get('your-api-name', '/path'))
       endpoint: 'https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev', // (required) -API Gateway URL + environment
       region: 'us-west-2' // (required) - API Gateway region
     }
@@ -59,8 +40,8 @@ function SignupForm() {
 
   async function handleSubmit(event) {
   event.preventDefault();
-  const apiName = 'Rest API';
-  const path = '/dev/signup';
+  const apiName = 'api1b9035b6';
+  const path = '/signup';
   const myInit = {
     body: JSON.stringify({
       email: email,

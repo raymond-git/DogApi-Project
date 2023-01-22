@@ -8,7 +8,7 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "dogapiproject0f917a64"
+          "resourceName": "dogapiproject8dea8e1c"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -47,6 +47,12 @@
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "dogapiproject8dea8e1c": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -63,6 +69,30 @@
         {
           "category": "function",
           "resourceName": "dogapiproject0f917a64"
+        }
+      ]
+    },
+    "AMPLIFY_function_dogapiproject8dea8e1c_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "dogapiproject8dea8e1c"
+        }
+      ]
+    },
+    "AMPLIFY_function_dogapiproject8dea8e1c_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "dogapiproject8dea8e1c"
+        }
+      ]
+    },
+    "AMPLIFY_function_dogapiproject8dea8e1c_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "dogapiproject8dea8e1c"
         }
       ]
     }

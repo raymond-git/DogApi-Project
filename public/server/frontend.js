@@ -23,6 +23,26 @@ app.use((req, res, next) => {
   next();
 });
 
+const { check, validationResult } = require('express-validator');
+
+app.use(
+  check('apikeyeSfcHgktQA6y5bEiuxErs4I0c32m6lBe608zjeAd').exists().withMessage('x-api-key header is required'),
+);
+
+app.use((req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  // Compare the api key from header with the api key from api gateway
+  if (req.headers['apikeyeSfcHgktQA6y5bEiuxErs4I0c32m6lBe608zjeAd'] !== process.env.API_KEY) {
+    return res.status(401).json({
+      error: 'Unauthorized access',
+    });
+  }
+  next();
+});
+
 const corsOptions ={
    origin:'*', 
    credentials:true,            //access-control-allow-credentials:true
@@ -44,7 +64,7 @@ mongoose.connect(dbURI, {
 })
   .then(() => {
     console.log("MongoDB Connected");
-    const port = process.env.PORT || 3002;
+    const port = process.env.PORT || 3003;
     app.listen(port, () => {
       console.log(`Server listening on port ${port}`);
     });

@@ -5,35 +5,17 @@ import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { Amplify, API } from 'aws-amplify';
 
-
-// Amplify.configure({
-//   Auth: {
-//     region: 'us-west-2',
-//     userPoolId: 'us-west-2_8huwQtHxw',
-//     userPoolWebClientId: 'a3oem26tu2b9iavd825ed19m95q',
-//   },
-//   API: {
-//     endpoints: [
-//       {
-//         name: "REST API",
-//         endpoint: "https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev",
-//         region: "us-west-2"
-//       },
-//     ]
-//   }
-// });
-
 Amplify.configure({
   aws_cloud_logic_custom: [
     {
       Auth: {
         region: 'us-west-2',
         userPoolId: 'us-west-2_8huwQtHxw',
-        userPoolWebClientId: 'a3oem26tu2b9iavd825ed19m95q',
+        userPoolWebClientId: '3oem26tu2b9iavd825ed19m95q',
       }
     },
     {
-      name: 'REST API', // (required) - API Name (This name is used used in the client app to identify the API - API.get('your-api-name', '/path'))
+      name: 'api1b9035b6', // (required) - API Name (This name is used used in the client app to identify the API - API.get('your-api-name', '/path'))
       endpoint: 'https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev', // (required) -API Gateway URL + environment
       region: 'us-west-2' // (required) - API Gateway region
     }
@@ -41,8 +23,7 @@ Amplify.configure({
 });
 
 
-function LoginForm(event) {
-  event.preventDefault();
+function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -71,7 +52,7 @@ function LoginForm(event) {
   async function handleSubmit(event) {
   event.preventDefault();
 
-  const apiName = 'Rest API';
+  const apiName = 'api1b9035b6';
   const path = '/login';
   const myInit = {
     body: JSON.stringify({
@@ -88,16 +69,17 @@ function LoginForm(event) {
 
 
   API.post(apiName, path, myInit)
-  .then((response) => {
+  .then((response) => response.json())
+  .then((data) => {
     // Validate client side login form
-    if (response.error) {
+    if (data.error) {
       const errorElement = document.getElementById("error-message");
-      errorElement.innerHTML = response.error;
+      errorElement.innerHTML = data.error;
       errorElement.style.color = "red";
       errorElement.style.display = "block";
       navigate("/login");
     } else {
-      if (response.authenticated) {
+      if (data.authenticated) {
         navigate("/welcome");
         console.log("success")
       }

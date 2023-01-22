@@ -17,6 +17,11 @@
         "dogapiproject0f917a64": {
           "deploymentBucketName": "amplify-dogapiproject-dev-143230-deployment",
           "s3Key": "amplify-builds/dogapiproject0f917a64-394c3374493648346e59-build.zip"
+        },
+        "dogapiproject8dea8e1c": {
+          "secretsPathAmplifyAppId": "d2vxguwxeag10x",
+          "deploymentBucketName": "amplify-dogapiproject-dev-143230-deployment",
+          "s3Key": "amplify-builds/dogapiproject8dea8e1c-692f3871596c6133746a-build.zip"
         }
       },
       "auth": {

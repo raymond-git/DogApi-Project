@@ -3,15 +3,9 @@
   "paths": {
     "/items": {
       "name": "/items",
-      "lambdaFunction": "dogapiproject0f917a64",
+      "lambdaFunction": "dogapiproject8dea8e1c",
       "permissions": {
-        "setting": "private",
-        "auth": [
-          "create",
-          "read",
-          "update",
-          "delete"
-        ]
+        "setting": "open"
       }
     }
   }
