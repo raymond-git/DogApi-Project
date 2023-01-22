@@ -13,42 +13,30 @@ const cookieParser = require("cookie-parser");
 const validator = require('validator');
 const app = express();
 app.use(cookieParser());
-
 app.use(express.json()); // to parse JSON bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*"); // The value "*" allows any domain to make requests
   res.header("Access-Control-Allow-Headers", "Content-Type"); // The value "Content-Type" allows the Content type header to be included in the request. Fixed Post request
+  // res.header("Access-Control-Allow-Methods")
   next();
 });
 
-const { check, validationResult } = require('express-validator');
-
-app.use(
-  check('apikeyeSfcHgktQA6y5bEiuxErs4I0c32m6lBe608zjeAd').exists().withMessage('x-api-key header is required'),
-);
-
-app.use((req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  // Compare the api key from header with the api key from api gateway
-  if (req.headers['apikeyeSfcHgktQA6y5bEiuxErs4I0c32m6lBe608zjeAd'] !== process.env.API_KEY) {
-    return res.status(401).json({
-      error: 'Unauthorized access',
-    });
-  }
-  next();
-});
+// Set up the connection to the mongoDB database
+// mongoose.connect("mongodb://127.0.0.1:27017").then(() => {
+// // mongoose.connect("mongodb://localhost:27017").then(() => {
+//   const port = process.env.PORT || 3002;
+//   app.listen(port, () => {
+//     console.log(`Server listening on port ${port}`);
+//   });
+// });
 
 const corsOptions ={
    origin:'*', 
    credentials:true,            //access-control-allow-credentials:true
    optionSuccessStatus:200,
 }
-
 app.use(cors(corsOptions)) // Use this after the variable declaration
 
 const dbURI = process.env.MONGODB_URI;
@@ -70,28 +58,6 @@ mongoose.connect(dbURI, {
     });
   })
   .catch(err => console.log(err));
-
-
-// Set up the connection to the mongoDB database
-// mongoose.connect("mongodb://127.0.0.1:27017").then(() => {
-// // mongoose.connect("mongodb://localhost:27017").then(() => {
-//   const port = process.env.PORT || 3002;
-//   app.listen(port, () => {
-//     console.log(`Server listening on port ${port}`);
-//   });
-// });
-
-// Check to see if connected to MongoDB database
-// const url = "mongodb://127.0.0.1:27017";
-// const client = new MongoClient(url);
-// client
-//   .connect()
-//   .then(() => {
-//     console.log("Connected to the database");
-//   })
-//   .catch((error) => {
-//     console.log("Can not connect to the database", error);
-//   });
 
   app.get("/", (req, res) => {
     res.send("hello world")
@@ -189,11 +155,10 @@ app.post("/login", async (req, res) => {
       sameSite: 'None'
     });
 
-    res.status(201).send({
+    return res.status(201).send({
       authenticated: "Token is set in the http=only and secure cookie"
     });
 
- 
   } catch (error) {
     return res.status(401).json({
       invalid: error,

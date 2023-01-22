@@ -2,24 +2,6 @@ import React, { useState } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { Amplify, API } from 'aws-amplify';
-
-Amplify.configure({
-  aws_cloud_logic_custom: [
-    {
-      Auth: {
-        region: 'us-west-2',
-        userPoolId: 'us-west-2_8huwQtHxw',
-        userPoolWebClientId: '3oem26tu2b9iavd825ed19m95q',
-      }
-    },
-    {
-      name: 'api1b9035b6', // (required) - API Name (This name is used used in the client app to identify the API - API.get('your-api-name', '/path'))
-      endpoint: 'https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev', // (required) -API Gateway URL + environment
-      region: 'us-west-2' // (required) - API Gateway region
-    }
-  ]
-});
 
 function SignupForm() {
   const [email, setEmail] = useState("");
@@ -38,154 +20,79 @@ function SignupForm() {
     navigate("/login");
   };
 
-  async function handleSubmit(event) {
-  event.preventDefault();
-  const apiName = 'api1b9035b6';
-  const path = '/signup';
-  const myInit = {
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  };
-
-  API.post(apiName, path, myInit)
-  .then((response) => response.json())
-    .then((data) => {
-  // Making sure previous error message is removed before new error message appeared
-  document.getElementById("error-message").textContent = "";
-  document.getElementById("error-message2").textContent = "";
-  document.getElementById("error-message3").textContent = "";
-  document.getElementById("error-message4").textContent = "";
-
-  // Validate if email already exists in the MongoDB database by evaluating the 'error' property in the server's
-  if (data.error === "Email already exists, try a new one") {
-    const errorElement = document.getElementById("error-message");
-    if (errorElement.childNodes.length === 0) {
-      const errorMessage = document.createTextNode("Email already exists, try a new one");
-      errorElement.append(errorMessage);
-      errorElement.style.color = "red";
-    }
-  }
-
-  // Validate if the provided email input is null by evaluating the 'error' property in the server's
-  if (data.error === "Please enter an email") {
-    const errorElement = document.getElementById("error-message2");
-    if (errorElement.childNodes.length === 0) {
-      const errorMessage = document.createTextNode("Please enter an email");
-      errorElement.append(errorMessage);
-      errorElement.style.color = "red";
-    }
-  }
-
-  // Validate if the provided email and password input are null by evaluating the 'error' property in the server's
-  if (data.error === "Please enter valid email and password") {
-    const errorElement = document.getElementById("error-message3");
-    if (errorElement.childNodes.length === 0) {
-      const errorMessage = document.createTextNode("Please enter valid email and password");
-      errorElement.append(errorMessage);
-      errorElement.style.color = "red";
-    }
-  }
-
-  // Validate if the provided password input is null by evaluating the 'error' property in the server's
-  if (data.error === "Please enter a password") {
-    const errorElement = document.getElementById("error-message4");
-    if (errorElement.childNodes.length === 0) {
-      const errorMessage = document.createTextNode("Please enter a password");
-      errorElement.append(errorMessage);
-      errorElement.style.color = "red";
-    }
-  }
-
-  // If there are no errors, the user is successfully signed up
-  if (data.status === "Success") {
-    navigate("/login");
-  }
-  console.log(data);
-  })
-  .catch(() => {
-  console.error("Something is wrong with your server");
-  });
-}
-
-
+ 
   // Make a post request to the server frontend.js
-  // async function handleSubmit(event) {
-  //   event.preventDefault();
-  //   fetch("https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev/signup", {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       email: email,
-  //       password: password,
-  //     }),
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       // Making sure previous error message is removed before new error message appeared
-  //       document.getElementById("error-message").textContent = "";
-  //       document.getElementById("error-message2").textContent = "";
-  //       document.getElementById("error-message3").textContent = "";
-  //       document.getElementById("error-message4").textContent = "";
+  async function handleSubmit(event) {
+    event.preventDefault();
+    fetch("http://localhost:3002/signup", {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Making sure previous error message is removed before new error message appeared
+        document.getElementById("error-message").textContent = "";
+        document.getElementById("error-message2").textContent = "";
+        document.getElementById("error-message3").textContent = "";
+        document.getElementById("error-message4").textContent = "";
 
-  //       // Validate if email already exists in the MongoDB database by evaluating the 'error' property in the server's
-  //       if (data.error === "Email already exists, try a new one") {
-  //         const errorElement = document.getElementById("error-message");
-  //         if (errorElement.childNodes.length === 0) {
-  //           const errorMessage = document.createTextNode("Email already exists, try a new one");
-  //           errorElement.append(errorMessage);
-  //           errorElement.style.color = "red";
-  //         }
-  //       }
+        // Validate if email already exists in the MongoDB database by evaluating the 'error' property in the server's
+        if (data.error === "Email already exists, try a new one") {
+          const errorElement = document.getElementById("error-message");
+          if (errorElement.childNodes.length === 0) {
+            const errorMessage = document.createTextNode("Email already exists, try a new one");
+            errorElement.append(errorMessage);
+            errorElement.style.color = "red";
+          }
+        }
 
-  //       // Validate if the provided email input is null by evaluating the 'error' property in the server's
-  //       if (data.error === "Please enter an email") {
-  //         const errorElement = document.getElementById("error-message2");
-  //         if (errorElement.childNodes.length === 0) {
-  //           const errorMessage = document.createTextNode("Please enter an email");
-  //           errorElement.append(errorMessage);
-  //           errorElement.style.color = "red";
-  //         }
-  //       }
+        // Validate if the provided email input is null by evaluating the 'error' property in the server's
+        if (data.error === "Please enter an email") {
+          const errorElement = document.getElementById("error-message2");
+          if (errorElement.childNodes.length === 0) {
+            const errorMessage = document.createTextNode("Please enter an email");
+            errorElement.append(errorMessage);
+            errorElement.style.color = "red";
+          }
+        }
 
-  //       // Validate if the provided email and password input are null by evaluating the 'error' property in the server's
-  //       if (data.error === "Please enter valid email and password") {
-  //         const errorElement = document.getElementById("error-message3");
-  //         if (errorElement.childNodes.length === 0) {
-  //           const errorMessage = document.createTextNode("Please enter valid email and password");
-  //           errorElement.append(errorMessage);
-  //           errorElement.style.color = "red";
-  //         }
-  //       }
+        // Validate if the provided email and password input are null by evaluating the 'error' property in the server's
+        if (data.error === "Please enter valid email and password") {
+          const errorElement = document.getElementById("error-message3");
+          if (errorElement.childNodes.length === 0) {
+            const errorMessage = document.createTextNode("Please enter valid email and password");
+            errorElement.append(errorMessage);
+            errorElement.style.color = "red";
+          }
+        }
 
-  //       // Validate if the provided password input is null by evaluating the 'error' property in the server's
-  //       if (data.error === "Please enter a password") {
-  //         const errorElement = document.getElementById("error-message4");
-  //         if (errorElement.childNodes.length === 0) {
-  //           const errorMessage = document.createTextNode("Please enter a password");
-  //           errorElement.append(errorMessage);
-  //           errorElement.style.color = "red";
-  //         }
-  //       }
+        // Validate if the provided password input is null by evaluating the 'error' property in the server's
+        if (data.error === "Please enter a password") {
+          const errorElement = document.getElementById("error-message4");
+          if (errorElement.childNodes.length === 0) {
+            const errorMessage = document.createTextNode("Please enter a password");
+            errorElement.append(errorMessage);
+            errorElement.style.color = "red";
+          }
+        }
 
-  //       // If there are no errors, the user is successfully signed up
-  //       if (data.status === "Success") {
-  //         navigate("/login");
-  //       }
-  //       console.log(data);
-  //     })
-  //     .catch(() => {
-  //       console.error("Something is wrong with your server");
-  //     });
-  // }
+        // If there are no errors, the user is successfully signed up
+        if (data.status === "Success") {
+          navigate("/login");
+        }
+        console.log(data);
+      })
+      .catch(() => {
+        console.error("Something is wrong with your server");
+      });
+  }
 
   return (
     <div>

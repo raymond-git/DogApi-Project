@@ -3,31 +3,11 @@ import { MDBBtn, MDBContainer, MDBRow, MDBCol, MDBInput } from "mdb-react-ui-kit
 import { Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
-import { Amplify, API } from 'aws-amplify';
-
-Amplify.configure({
-  aws_cloud_logic_custom: [
-    {
-      Auth: {
-        region: 'us-west-2',
-        userPoolId: 'us-west-2_8huwQtHxw',
-        userPoolWebClientId: '3oem26tu2b9iavd825ed19m95q',
-      }
-    },
-    {
-      name: 'api1b9035b6', // (required) - API Name (This name is used used in the client app to identify the API - API.get('your-api-name', '/path'))
-      endpoint: 'https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev', // (required) -API Gateway URL + environment
-      region: 'us-west-2' // (required) - API Gateway region
-    }
-  ]
-});
-
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -47,88 +27,41 @@ function LoginForm() {
     setToken(tokenFromCookies);
   }, []);
 
-  
-
+  //Make a post request to the server frontend.js
   async function handleSubmit(event) {
-  event.preventDefault();
+    event.preventDefault();
+      fetch("http://localhost:3002/login", {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`//Authenticate user and then pass the token to the server
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
 
-  const apiName = 'api1b9035b6';
-  const path = '/login';
-  const myInit = {
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
-    },
-    response: true,
-  };
-
-
-  API.post(apiName, path, myInit)
-  .then((response) => response.json())
-  .then((data) => {
-    // Validate client side login form
-    if (data.error) {
-      const errorElement = document.getElementById("error-message");
-      errorElement.innerHTML = data.error;
-      errorElement.style.color = "red";
-      errorElement.style.display = "block";
-      navigate("/login");
-    } else {
-      if (data.authenticated) {
-        navigate("/welcome");
-        console.log("success")
-      }
-    }
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-}
-
-
-  // Make a post request to the server frontend.js
-  // async function handleSubmit(event) {
-  //   event.preventDefault();
-  //   // fetch("https://www.dogbrowsing.com/login", {
-  //     fetch("https://p4z38ggupb.execute-api.us-west-2.amazonaws.com/dev/login", {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       email: email,
-  //       password: password,
-  //     }),
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //       "Authorization": `Bearer ${token}`//Authenticate user and then pass the token to the server
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-
-  //       // Validate client side login form
-  //       if (data.error) {
-  //         const errorElement = document.getElementById("error-message");
-  //         errorElement.innerHTML = data.error;
-  //         errorElement.style.color = "red";
-  //         errorElement.style.display = "block";
-  //         navigate("/login");
-  //       } else {
-  //         if (data.authenticated) {
-  //           navigate("/welcome");
-  //           console.log("successs")
-  //         }
-  //       }
-  //       console.log(data);
-  //     })
-  //     .catch(() => {
-  //       console.error("Something is wrong with your server");
-  //     });
-  // }
+        // Validate client side login form
+        if (data.error) {
+          const errorElement = document.getElementById("error-message");
+          errorElement.innerHTML = data.error;
+          errorElement.style.color = "red";
+          errorElement.style.display = "block";
+          navigate("/login");
+        } else {
+          if(data) {
+            navigate("/welcome");
+          }
+        }
+      })
+      .catch(() => {
+        console.error("Something is wrong with your server");
+      });
+  }
 
   return (
     <div>
