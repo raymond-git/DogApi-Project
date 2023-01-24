@@ -52,7 +52,7 @@ mongoose.connect(dbURI, {
 })
   .then(() => {
     console.log("MongoDB Connected");
-    const port = process.env.PORT || 3003;
+    const port = process.env.PORT || 8080;
     app.listen(port, () => {
       console.log(`Server listening on port ${port}`);
     });
