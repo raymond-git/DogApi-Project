@@ -25,7 +25,7 @@ function SignupForm() {
   async function handleSubmit(event) {
     event.preventDefault();
     // fetch("https://ea11-2601-645-c480-6b00-ac7e-c86-eff1-349f.ngrok.io/signup", {
-      fetch("https://34.102.107.54/signup", {
+      fetch("https://34.102.107.54:8080/signup", {
       method: "POST",
       body: JSON.stringify({
         email: email,
