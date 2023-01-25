@@ -30,8 +30,6 @@
 - Connect to MongoDB: Open a new terminal window and use the command "mongo" to connect to the MongoDB server. This will open the MongoDB shell, where you can interact with the database.
 - Create a database: To create a new database, use the command "use <database_name>". For example, "use mydb" will create a new database called "mydb".
 
-**Installation**  I initiated the process by creating a React application by adhering to the guidelines provided in the React documentation, which included installing NodeJS to ensure proper functioning of the application. A client and server side is set up to communicate between each other. The client-server architecture is established so that the client can initiate requests to a separate program, the server, which then responds to those requests. In the context of login and signup for my project, this means that the client, such as a web page or mobile app, sends a request to the server to either log in or sign up a user, and the server then responds with the appropriate information or confirmation. To securely store users' credentials upon sign-up, I employed the use of MongoDB Atlas to keep all the data. For my project, I utilized two distinct API's to gather data about dogs. One is the Dog API available at https://dog.ceo/dog-api and the other is the Dog API, which can be accessed at https://documenter.getpostman.com/view/4016432/the-dog-api/RW81vZ4Z 
-
 **Author:** Raymond Huang
 
 **Website Design using Figma**
