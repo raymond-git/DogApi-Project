@@ -30,7 +30,7 @@ function LoginForm() {
   //Make a post request to the server frontend.js
   async function handleSubmit(event) {
     event.preventDefault();
-      fetch("https://ce56-2601-645-c480-6b00-ac7e-c86-eff1-349f.ngrok.io/login", {
+      fetch("https://www.dogbrowsing.com/login", {
       method: "POST",
       body: JSON.stringify({
         email: email,
