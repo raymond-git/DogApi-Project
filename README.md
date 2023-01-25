@@ -1,18 +1,20 @@
 # Dog Api Project Work in Progress...
 # Dog Api Project
 
-*Project Title:* A Dog Breeds Information Website
-*Description:* People can visit our dog breed website that features random images of dogs for many reasons. Some people may simply enjoy looking at pictures of dogs, as they find them cute and endearing. Others may be looking for inspiration or ideas for a specific breed of dog that they are interested in adopting. For example, a person might visit a website with random images of dogs to get a better sense of what a particular breed looks like in terms of size, coat color, and overall appearance. Additionally, a website with random images of dogs could be a fun way to pass the time and take a break from other tasks or responsibilities. Overall, a website with random images of dogs can provide enjoyment, education, and inspiration for people who are interested in these beloved animals. That is why we created this page.
+**Project Title:** Dog Breeds Information Website  
 
-*Main Features Include:*
+**Description:** People can visit our dog breed website that features random images of dogs for many reasons. Some people may simply enjoy looking at pictures of dogs, as they find them cute and endearing. Others may be looking for inspiration or ideas for a specific breed of dog that they are interested in adopting. For example, a person might visit a website with random images of dogs to get a better sense of what a particular breed looks like in terms of size, coat color, and overall appearance. Additionally, a website with random images of dogs could be a fun way to pass the time and take a break from other tasks or responsibilities. Overall, a website with random images of dogs can provide enjoyment, education, and inspiration for people who are interested in these beloved animals. That is why we created this page.  
+
+**Main Features Include:**
 - Search Function: Allows users to filder breeds by type. Each breed contains information about their height, weight, breed group, lifespan, and temperament
 - Drop-down menu: Provide users with the ability to view images of specific breeds by selecting them from a drop-down menu
 - Button Generator: Include a button that allows users to generate random dog images
 - MongoDB Atlas: Utilizing MongoDB Atlas to securely store user sign-up credentials, such as email and password, and allowing users to authenticate themselves by  
-  verifying their credentials.
-*Installation*
+  verifying their credentials.  
+  
+**Installation**  I initiated the process by creating a React application by adhering to the guidelines provided in the React documentation, which included installing NodeJS to ensure proper functioning of the application. A client and server side is set up to communicate between each other. The client-server architecture is established so that the client can initiate requests to a separate program, the server, which then responds to those requests. In the context of login and signup for my project, this means that the client, such as a web page or mobile app, sends a request to the server to either log in or sign up a user, and the server then responds with the appropriate information or confirmation. To securely store users' credentials upon sign-up, I employed the use of MongoDB Atlas to keep all the data. For my project, I utilized two distinct API's to gather data about dogs. One is the Dog API available at https://dog.ceo/dog-api and the other is the Dog API, which can be accessed at https://documenter.getpostman.com/view/4016432/the-dog-api/RW81vZ4Z 
 
-*Author:* Raymond Huang
+**Author:** Raymond Huang
 
 
 # Getting Started with Create React App
