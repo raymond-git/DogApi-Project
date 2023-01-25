@@ -1,4 +1,3 @@
-# Dog Api Project Work in Progress...
 # Dog Api Project
 **Author:** Raymond Huang
 
