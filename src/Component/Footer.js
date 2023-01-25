@@ -2,7 +2,7 @@ function Footer() {
   return (
     <div>
       <div className="wrap5">
-        <div className="footer">
+        <div className="footer overflow-x-hidden">
           <div id="footer-padding" className="row">
             <div className="col-sm">
               <div className="footer-border">
