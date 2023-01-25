@@ -1,5 +1,6 @@
 # Dog Api Project Work in Progress...
 # Dog Api Project
+**Author:** Raymond Huang
 
 **Project Title:** Dog Breeds Information Website  
 
@@ -19,6 +20,7 @@
 - In addition to running "npm start", make sure to also execute "node frontend.js" to initiate both the client and server-side simultaneously for handling requests and responses. So make sure to have two terminals open to run.  
 - If you wish to start the localhost server automatically without needing to run "node frontend.js" every time, you can use a process manager such as PM2. For more information, refer to the documentation at https://pm2.io/docs/runtime/overview/
 - For my project, I utilized two distinct API's to gather data about dogs. One is the Dog API available at https://dog.ceo/dog-api and the other is the Dog API, which can be accessed at https://documenter.getpostman.com/view/4016432/the-dog-api/RW81vZ4Z
+- I used mongodb atlas to store my data so make sure to go to the MongoDB Atlas website https://www.mongodb.com/cloud/atlas and sign up a free account. Refer to their documentation to set up configuration. It is important to create a .env file in the same directory as your server.js or frontend.js file, in order to securely store your special key or password. This will allow you to securely connect to your code
 
 **MongoDB Installation Setup**  
 - Download MongoDB: Go to the MongoDB website (https://www.mongodb.com/download-center/community) and download the appropriate version for your operating system.  
@@ -29,8 +31,6 @@
 - Start MongoDB: Open a command prompt and navigate to the directory where you extracted the MongoDB files. Use the command "mongod --config <path_to_config_file>" to start the MongoDB server. For example, on Windows, the command would be "mongod --config C:\Program Files\MongoDB\mongod.cfg". On Linux, the command would be "mongod --config /usr/local/mongodb/mongod.cfg"
 - Connect to MongoDB: Open a new terminal window and use the command "mongo" to connect to the MongoDB server. This will open the MongoDB shell, where you can interact with the database.
 - Create a database: To create a new database, use the command "use <database_name>". For example, "use mydb" will create a new database called "mydb".
-
-**Author:** Raymond Huang
 
 **Website Design using Figma**
 ![Figma1](https://user-images.githubusercontent.com/52261775/214488688-a73e3932-7148-427c-8d40-49ffa9152f90.PNG)
